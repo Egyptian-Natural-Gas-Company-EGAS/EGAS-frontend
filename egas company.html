@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EGAS Integrated System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e8b57;
+            --secondary-color: #1e5a3a;
+            --light-bg: #f5f5f5;
+            --dark-bg: #121212;
+            --light-card: #ffffff;
+            --dark-card: #1e1e1e;
+            --light-text: #333333;
+            --dark-text: #f5f5f5;
+            --light-input: #ffffff;
+            --dark-input: #2c2c2c;
+            --light-border: #dddddd;
+            --dark-border: #444444;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: var(--light-bg);
+            color: var(--light-text);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode {
+            background: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        body[dir="rtl"] {
+            direction: rtl;
+        }
+
+        body[dir="ltr"] {
+            direction: ltr;
+        }
+
+        /* Background Logo - Fixed */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.imgur.com/4ab4dc38.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .top-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .theme-toggle, .lang-toggle {
+            background: var(--light-card);
+            border: 1px solid var(--light-border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .theme-toggle, 
+        body.dark-mode .lang-toggle {
+            background: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+
+        .theme-toggle:hover, .lang-toggle:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .container {
+            background: var(--light-card);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            margin: 0 auto;
+            max-width: 500px;
+        }
+
+        body.dark-mode .container {
+            background: var(--dark-card);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .company-name {
+            color: var(--primary-color);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--light-border);
+            border-radius: 6px;
+            background: var(--light-input);
+            color: var(--light-text);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode input, 
+        body.dark-mode select, 
+        body.dark-mode textarea {
+            border-color: var(--dark-border);
+            background: var(--dark-input);
+            color: var(--dark-text);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(46, 139, 87, 0.2);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: transparent;
+            color: var(--primary-color);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            color: var(--secondary-color);
+        }
+
+        .links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        .user-types {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .user-type-card {
+            background: var(--light-input);
+            border: 1px solid var(--light-border);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .user-type-card {
+            background: var(--dark-input);
+            border-color: var(--dark-border);
+        }
+
+        .user-type-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary-color);
+        }
+
+        .user-type-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-left: 20px;
+        }
+
+        .user-type-info h3 {
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .departments-container {
+            overflow-x: auto;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        .departments {
+            display: flex;
+            gap: 15px;
+            padding: 10px 40px;
+        }
+
+        .department-card {
+            min-width: 200px;
+            background: var(--light-input);
+            border: 1px solid var(--light-border);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .department-card {
+            background: var(--dark-input);
+            border-color: var(--dark-border);
+        }
+
+        .departments-container {
+    overflow-x: auto;
+    padding-bottom: 20px;
+    position: relative;
+    margin: 20px 0;
+}
+
+.departments {
+    display: flex;
+    gap: 25px;
+    padding: 15px 50px;
+}
+
+.department-card {
+    min-width: 280px;
+    background: var(--light-input);
+    border: 1px solid var(--light-border);
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .department-card {
+    background: var(--dark-input);
+    border-color: var(--dark-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.department-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    border-color: var(--primary-color);
+}
+
+.department-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin: 0 auto 20px;
+}
+
+.department-card h3 {
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    font-size: 20px;
+}
+
+.department-card p {
+    font-size: 16px;
+    color: var(--light-text);
+}
+
+body.dark-mode .department-card p {
+    color: var(--dark-text);
+}
+
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    font-size: 18px;
+}
+
+.scroll-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.scroll-left {
+    right: 15px;
+}
+
+.scroll-right {
+    left: 15px;
+}
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            height: 80vh;
+            overflow: hidden;
+        }
+
+        .dashboard-content-wrapper {
+            height: calc(100% - 80px);
+            overflow-y: auto;
+            padding-right: 20px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-title {
+            color: var(--primary-color);
+            font-size: 28px;
+        }
+
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-card {
+            background: var(--light-input);
+            border: 1px solid var(--light-border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .dashboard-card {
+            background: var(--dark-input);
+            border-color: var(--dark-border);
+        }
+
+        .dashboard-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .file-upload-area {
+            border: 2px dashed var(--light-border);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .file-upload-area {
+            border-color: var(--dark-border);
+        }
+
+        .file-upload-area:hover {
+            border-color: var(--primary-color);
+            background: rgba(46, 139, 87, 0.05);
+        }
+
+        .file-upload-area i {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .post-form {
+            margin-top: 15px;
+        }
+
+        .post-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .departments-contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .department-contact-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .department-contact-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .ai-assistant {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .ai-assistant:hover {
+            transform: scale(1.1);
+            background: var(--secondary-color);
+        }
+
+        .ai-chat {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 450px;
+            background: var(--light-card);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        body.dark-mode .ai-chat {
+            background: var(--dark-card);
+        }
+
+        .ai-chat.active {
+            display: flex;
+        }
+
+        .ai-chat-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ai-chat-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .ai-chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .ai-message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .ai-message.user {
+            background: var(--primary-color);
+            color: white;
+            margin-left: auto;
+        }
+
+        .ai-message.ai {
+            background: var(--light-input);
+            align-self: flex-start;
+        }
+
+        body.dark-mode .ai-message.ai {
+            background: var(--dark-input);
+        }
+
+        .ai-chat-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid var(--light-border);
+        }
+
+        body.dark-mode .ai-chat-input {
+            border-color: var(--dark-border);
+        }
+
+        .ai-chat-input input {
+            flex: 1;
+            margin-left: 10px;
+        }
+
+        .ai-chat-input button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .videos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .video-card {
+            background: var(--light-input);
+            border: 1px solid var(--light-border);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        body.dark-mode .video-card {
+            background: var(--dark-input);
+            border-color: var(--dark-border);
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 200px;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .video-play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(46, 139, 87, 0.8);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .video-play-icon:hover {
+            background: var(--primary-color);
+        }
+
+        .video-info {
+            padding: 15px;
+        }
+
+        .video-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .video-description {
+            font-size: 14px;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .video-description {
+            color: var(--dark-text);
+        }
+
+        .btn-step-back {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .btn-step-back:hover {
+            background: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .dashboard-scroll-btn {
+            position: absolute;
+            left: 10px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-scroll-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .dashboard-scroll-up {
+            top: 80px;
+        }
+
+        .dashboard-scroll-down {
+            bottom: 20px;
+        }
+
+        .file-list {
+            margin-top: 15px;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: var(--light-bg);
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        body.dark-mode .file-item {
+            background: var(--dark-bg);
+        }
+
+        .file-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .file-size {
+            font-size: 14px;
+            color: var(--secondary-color);
+        }
+
+        .video-section {
+            margin-bottom: 30px;
+        }
+
+        .video-section-title {
+            color: var(--primary-color);
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .ai-chat {
+                width: 90%;
+                right: 5%;
+            }
+            
+            .btn-step-back {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+            
+            .dashboard-container {
+                height: 90vh;
+            }
+            
+            .video-thumbnail {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-controls">
+        <div class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </div>
+        <div class="lang-toggle" id="lang-toggle">
+            <i class="fas fa-globe"></i>
+        </div>
+    </div>
+    
+    <div class="app-container">
+        <!-- صفحة تسجيل الدخول -->
+        <div id="login-page" class="page active">
+            <div class="container">
+                <div class="logo-container">
+                    <img src="https://i.imgur.com/4ab4dc38.jpg" alt="EGAS Logo" class="logo">
+                    <div class="company-name" data-en="Egyptian Natural Gas Company" data-ar="الشركة المصرية للغازات الطبيعية">Egyptian Natural Gas Company</div>
+                </div>
+                
+                <h2 data-en="Login" data-ar="تسجيل الدخول">Login</h2>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <label data-en="Username" data-ar="اسم المستخدم">Username</label>
+                        <input type="text" id="username" data-en-placeholder="Enter username" data-ar-placeholder="أدخل اسم المستخدم" placeholder="Enter username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label data-en="Password" data-ar="كلمة المرور">Password</label>
+                        <input type="password" id="password" data-en-placeholder="Enter password" data-ar-placeholder="أدخل كلمة المرور" placeholder="Enter password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn" data-en="Login" data-ar="تسجيل الدخول">Login</button>
+                </form>
+                
+                <div class="links">
+                    <a href="#" id="signup-link" data-en="Create new account" data-ar="إنشاء حساب جديد">Create new account</a>
+                    <a href="#" id="forget-password-link" data-en="Forgot password?" data-ar="نسيت كلمة المرور؟">Forgot password?</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- صفحة اختيار نوع المستخدم -->
+        <div id="user-type-page" class="page">
+            <div class="container">
+                <div class="logo-container">
+                    <img src="https://i.imgur.com/4ab4dc38.jpg" alt="EGAS Logo" class="logo">
+                    <div class="company-name" data-en="Egyptian Natural Gas Company" data-ar="الشركة المصرية للغازات الطبيعية">Egyptian Natural Gas Company</div>
+                </div>
+                
+                <h2 data-en="Select User Type" data-ar="اختر نوع المستخدم">Select User Type</h2>
+                
+                <div class="user-types">
+                    <div class="user-type-card" id="employee-type">
+                        <div class="user-type-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="user-type-info">
+                            <h3 data-en="Employee" data-ar="موظف">Employee</h3>
+                            <p data-en="Login as company employee" data-ar="الدخول كموظف في الشركة">Login as company employee</p>
+                        </div>
+                    </div>
+                    
+                    <div class="user-type-card" id="trainee-type">
+                        <div class="user-type-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="user-type-info">
+                            <h3 data-en="Trainee" data-ar="متدرب">Trainee</h3>
+                            <p data-en="Login as company trainee" data-ar="الدخول كمتدرب في الشركة">Login as company trainee</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- صفحة اختيار الإدارة -->
+        <div id="department-page" class="page">
+            <div class="container">
+                <div class="logo-container">
+                    <img src="https://i.imgur.com/4ab4dc38.jpg" alt="EGAS Logo" class="logo">
+                    <div class="company-name" data-en="Egyptian Natural Gas Company" data-ar="الشركة المصرية للغازات الطبيعية">Egyptian Natural Gas Company</div>
+                </div>
+                
+                <h2 data-en="Select Department" data-ar="اختر الإدارة">Select Department</h2>
+                
+                <div class="departments-container">
+                    <button class="scroll-btn scroll-left" id="scroll-left">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="scroll-btn scroll-right" id="scroll-right">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    
+                    <div class="departments" id="departments">
+                        <div class="department-card" data-dept="it">
+                            <div class="department-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3 data-en="Information Technology" data-ar="تقنية المعلومات">Information Technology</h3>
+                            <p>IT Department</p>
+                        </div>
+                        
+                        <div class="department-card" data-dept="hr">
+                            <div class="department-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 data-en="Human Resources" data-ar="الموارد البشرية">Human Resources</h3>
+                            <p>HR Department</p>
+                        </div>
+                        
+                        <div class="department-card" data-dept="finance">
+                            <div class="department-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 data-en="Finance" data-ar="المالية">Finance</h3>
+                            <p>Finance Department</p>
+                        </div>
+                        
+                        <div class="department-card" data-dept="operations">
+                            <div class="department-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h3 data-en="Operations" data-ar="العمليات">Operations</h3>
+                            <p>Operations Department</p>
+                        </div>
+                        
+                        <div class="department-card" data-dept="marketing">
+                            <div class="department-icon">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <h3 data-en="Marketing" data-ar="التسويق">Marketing</h3>
+                            <p>Marketing Department</p>
+                        </div>
+                        
+                        <div class="department-card" data-dept="legal">
+                            <div class="department-icon">
+                                <i class="fas fa-gavel"></i>
+                            </div>
+                            <h3 data-en="Legal Affairs" data-ar="الشئون القانونية">Legal Affairs</h3>
+                            <p>Legal Department</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- لوحة تحكم الموظفين -->
+        <div id="employee-dashboard-page" class="page">
+            <div class="dashboard-container">
+                <button class="dashboard-scroll-btn dashboard-scroll-up" id="dashboard-scroll-up">
+                    <i class="fas fa-chevron-up"></i>
+                </button>
+                <button class="dashboard-scroll-btn dashboard-scroll-down" id="dashboard-scroll-down">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                
+                <div class="dashboard-header">
+                    <div class="logo-container">
+                        <img src="https://i.imgur.com/4ab4dc38.jpg" alt="EGAS Logo" class="logo">
+                        <div class="company-name" data-en="Egyptian Natural Gas Company" data-ar="الشركة المصرية للغازات الطبيعية">Egyptian Natural Gas Company</div>
+                    </div>
+                    <h1 class="dashboard-title" data-en="Employee Dashboard" data-ar="لوحة تحكم الموظفين">Employee Dashboard</h1>
+                </div>
+                
+                <div class="dashboard-content-wrapper" id="employee-dashboard-content">
+                    <div class="dashboard-content">
+                        <div class="dashboard-card">
+                            <h3><i class="fas fa-cloud-upload-alt"></i> <span data-en="Upload Files" data-ar="رفع الملفات">Upload Files</span></h3>
+                            <div class="file-upload-area" id="file-upload-area">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p data-en="Drag and drop files here or click to select" data-ar="اسحب وأفلت الملفات هنا أو انقر للاختيار">Drag and drop files here or click to select</p>
+                                <input type="file" id="file-input" style="display: none;" multiple>
+                            </div>
+                            <div id="file-list"></div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <h3><i class="fas fa-edit"></i> <span data-en="Create Post" data-ar="نشر منشور">Create Post</span></h3>
+                            <form class="post-form" id="post-form">
+                                <div class="form-group">
+                                    <label data-en="Post Title" data-ar="عنوان المنشور">Post Title</label>
+                                    <input type="text" id="post-title" data-en-placeholder="Enter post title" data-ar-placeholder="أدخل عنوان المنشور" placeholder="Enter post title">
+                                </div>
+                                <div class="form-group">
+                                    <label data-en="Post Content" data-ar="محتوى المنشور">Post Content</label>
+                                    <textarea id="post-content" data-en-placeholder="Enter post content" data-ar-placeholder="أدخل محتوى المنشور" placeholder="Enter post content"></textarea>
+                                </div>
+                                <button type="submit" class="btn" data-en="Publish Post" data-ar="نشر المنشور">Publish Post</button>
+                            </form>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <h3><i class="fas fa-comments"></i> <span data-en="Contact Departments" data-ar="التواصل مع الإدارات">Contact Departments</span></h3>
+                            <p data-en="Select department to contact:" data-ar="اختر الإدارة التي تريد التواصل معها:">Select department to contact:</p>
+                            <div class="departments-contact">
+                                <button class="department-contact-btn" data-dept="it" data-en="IT" data-ar="تقنية المعلومات">IT</button>
+                                <button class="department-contact-btn" data-dept="hr" data-en="HR" data-ar="الموارد البشرية">HR</button>
+                                <button class="department-contact-btn" data-dept="finance" data-en="Finance" data-ar="المالية">Finance</button>
+                                <button class="department-contact-btn" data-dept="operations" data-en="Operations" data-ar="العمليات">Operations</button>
+                                <button class="department-contact-btn" data-dept="marketing" data-en="Marketing" data-ar="التسويق">Marketing</button>
+                                <button class="department-contact-btn" data-dept="legal" data-en="Legal" data-ar="الشئون القانونية">Legal</button>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <h3><i class="fas fa-bell"></i> <span data-en="Notifications" data-ar="الإشعارات">Notifications</span></h3>
+                            <div id="notifications">
+                                <p data-en="No new notifications" data-ar="لا توجد إشعارات جديدة">No new notifications</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- لوحة تحكم المتدربين -->
+        <div id="trainee-dashboard-page" class="page">
+            <div class="dashboard-container">
+                <button class="dashboard-scroll-btn dashboard-scroll-up" id="trainee-dashboard-scroll-up">
+                    <i class="fas fa-chevron-up"></i>
+                </button>
+                <button class="dashboard-scroll-btn dashboard-scroll-down" id="trainee-dashboard-scroll-down">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                
+                <div class="dashboard-header">
+                    <div class="logo-container">
+                        <img src="https://i.imgur.com/4ab4dc38.jpg" alt="EGAS Logo" class="logo">
+                        <div class="company-name" data-en="Egyptian Natural Gas Company" data-ar="الشركة المصرية للغازات الطبيعية">Egyptian Natural Gas Company</div>
+                    </div>
+                    <h1 class="dashboard-title" data-en="Trainee Dashboard" data-ar="لوحة تحكم المتدربين">Trainee Dashboard</h1>
+                </div>
+                
+                <div class="dashboard-content-wrapper" id="trainee-dashboard-content">
+                    <div class="dashboard-card">
+                        <h3><i class="fas fa-video"></i> <span data-en="Training Videos" data-ar="فيديوهات التدريب">Training Videos</span></h3>
+                        
+                        <div class="video-section">
+                            <div class="videos-container">
+                                <div class="video-card" data-video="https://youtu.be/hvIatX1UpBw?si=1wqvkLz98g9v0jT7">
+                                    <div class="video-thumbnail" style="background-image: url('https://img.youtube.com/vi/hvIatX1UpBw/maxresdefault.jpg')">
+                                        <div class="video-play-icon">
+                                            <i class="fas fa-play"></i>
+                                        </div>
+                                    </div>
+                                    <div class="video-info">
+                                        <div class="video-title" data-en="Introduction to Natural Gas Industry" data-ar="مقدمة في صناعة الغاز الطبيعي">Introduction to Natural Gas Industry</div>
+                                        <div class="video-description" data-en="Learn the basics of natural gas industry and its importance" data-ar="تعرف على أساسيات صناعة الغاز الطبيعي وأهميتها">Learn the basics of natural gas industry and its importance</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="video-card" data-video="https://youtu.be/-bzzFWE3o_o?si=DExePIf7aGAErC45">
+                                    <div class="video-thumbnail" style="background-image: url('https://img.youtube.com/vi/-bzzFWE3o_o/maxresdefault.jpg')">
+                                        <div class="video-play-icon">
+                                            <i class="fas fa-play"></i>
+                                        </div>
+                                    </div>
+                                    <div class="video-info">
+                                        <div class="video-title" data-en="Safety and Security in Gas Industry" data-ar="سلامة وأمن في صناعة الغاز">Safety and Security in Gas Industry</div>
+                                        <div class="video-description" data-en="Safety procedures in natural gas sites" data-ar="إجراءات السلامة والأمن في مواقع الغاز الطبيعي">Safety procedures in natural gas sites</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="video-section">
+                            <h4 class="video-section-title" data-en="Training Materials" data-ar="مواد التدريب">
+                                <i class="fas fa-file-alt"></i> <span data-en="Training Materials" data-ar="مواد التدريب">Training Materials</span>
+                            </h4>
+                            <div class="file-upload-area" id="trainee-file-upload-area">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p data-en="Upload training materials or click to browse" data-ar="ارفع مواد التدريب أو انقر للاستعراض">Upload training materials or click to browse</p>
+                                <input type="file" id="trainee-file-input" style="display: none;" multiple>
+                            </div>
+                            <div id="trainee-file-list"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-content">
+                        <div class="dashboard-card">
+                            <h3><i class="fas fa-tasks"></i> <span data-en="Training Tasks" data-ar="مهام التدريب">Training Tasks</span></h3>
+                            <div id="training-tasks">
+                                <p data-en="No training tasks available" data-ar="لا توجد مهام تدريبية حالياً">No training tasks available</p>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <h3><i class="fas fa-certificate"></i> <span data-en="Certificates" data-ar="الشهادات">Certificates</span></h3>
+                            <div id="certificates">
+                                <p data-en="No certificates earned yet" data-ar="لم تحصل على أي شهادات بعد">No certificates earned yet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- مساعد الذكاء الاصطناعي -->
+    <div class="ai-assistant" id="ai-assistant">
+        <i class="fas fa-robot"></i>
+    </div>
+    
+    <div class="ai-chat" id="ai-chat">
+        <div class="ai-chat-header">
+            <div data-en="AI Assistant" data-ar="مساعد الذكاء الاصطناعي">AI Assistant</div>
+            <button class="ai-chat-close" id="ai-chat-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="ai-chat-messages" id="ai-chat-messages">
+            <div class="ai-message ai">
+                <span data-en="Hello! I'm EGAS AI Assistant. How can I help you today?" data-ar="مرحباً! أنا مساعد الذكاء الاصطناعي الخاص بشركة إيجاس. كيف يمكنني مساعدتك اليوم؟">Hello! I'm EGAS AI Assistant. How can I help you today?</span>
+            </div>
+        </div>
+        <div class="ai-chat-input">
+            <input type="text" id="ai-chat-input" data-en-placeholder="Type your question here..." data-ar="اكتب سؤالك هنا..." placeholder="Type your question here...">
+            <button id="ai-send-btn">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- زر الرجوع خطوة واحدة -->
+    <button class="btn-step-back" id="btn-step-back">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Language Toggle
+        const langToggle = document.getElementById('lang-toggle');
+        const html = document.documentElement;
+        
+        // Default language is English
+        let currentLang = 'en';
+        
+        // Check for saved language preference
+        const savedLang = localStorage.getItem('lang');
+        if (savedLang === 'ar') {
+            currentLang = 'ar';
+            html.setAttribute('lang', 'ar');
+            html.setAttribute('dir', 'rtl');
+            updateLanguage('ar');
+        }
+        
+        langToggle.addEventListener('click', () => {
+            if (currentLang === 'en') {
+                currentLang = 'ar';
+                html.setAttribute('lang', 'ar');
+                html.setAttribute('dir', 'rtl');
+                localStorage.setItem('lang', 'ar');
+                updateLanguage('ar');
+            } else {
+                currentLang = 'en';
+                html.setAttribute('lang', 'en');
+                html.setAttribute('dir', 'ltr');
+                localStorage.setItem('lang', 'en');
+                updateLanguage('en');
+            }
+        });
+        
+        // Update language function
+        function updateLanguage(lang) {
+            document.querySelectorAll('[data-en]').forEach(element => {
+                if (lang === 'ar' && element.getAttribute('data-ar')) {
+                    element.textContent = element.getAttribute('data-ar');
+                } else if (lang === 'en' && element.getAttribute('data-en')) {
+                    element.textContent = element.getAttribute('data-en');
+                }
+            });
+            
+            document.querySelectorAll('[data-en-placeholder]').forEach(element => {
+                if (lang === 'ar' && element.getAttribute('data-ar-placeholder')) {
+                    element.placeholder = element.getAttribute('data-ar-placeholder');
+                } else if (lang === 'en' && element.getAttribute('data-en-placeholder')) {
+                    element.placeholder = element.getAttribute('data-en-placeholder');
+                }
+            });
+        }
+        
+        // Page Navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            
+            // Add to history
+            if (!pageHistory.includes(pageId)) {
+                pageHistory.push(pageId);
+            }
+            
+            // Update step back button visibility
+            updateStepBackButton();
+        }
+        
+        // Page history
+        let pageHistory = ['login-page'];
+        
+        // Step back button
+        const stepBackBtn = document.getElementById('btn-step-back');
+        
+        function updateStepBackButton() {
+            if (pageHistory.length > 1) {
+                stepBackBtn.style.display = 'flex';
+            } else {
+                stepBackBtn.style.display = 'none';
+            }
+        }
+        
+        stepBackBtn.addEventListener('click', () => {
+            if (pageHistory.length > 1) {
+                pageHistory.pop(); // Remove current page
+                const prevPage = pageHistory[pageHistory.length - 1]; // Get previous page
+                showPage(prevPage);
+            }
+        });
+        
+        // Initialize step back button
+        updateStepBackButton();
+        
+        // Login Form
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username && password) {
+                showPage('user-type-page');
+            }
+        });
+        
+        // Signup and Forget Password links
+        document.getElementById('signup-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert(currentLang === 'en' ? 'Create new account page. This is a demo.' : 'صفحة إنشاء حساب جديد. هذا عرض توضيحي.');
+        });
+        
+        document.getElementById('forget-password-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert(currentLang === 'en' ? 'Password recovery page. This is a demo.' : 'صفحة استعادة كلمة المرور. هذا عرض توضيحي.');
+        });
+        
+        // User Type Selection
+        document.getElementById('employee-type').addEventListener('click', () => {
+            showPage('department-page');
+            localStorage.setItem('userType', 'employee');
+        });
+        
+        document.getElementById('trainee-type').addEventListener('click', () => {
+            showPage('department-page');
+            localStorage.setItem('userType', 'trainee');
+        });
+        
+        // Department Scrolling
+        const departmentsContainer = document.getElementById('departments');
+        const scrollLeftBtn = document.getElementById('scroll-left');
+        const scrollRightBtn = document.getElementById('scroll-right');
+        
+        scrollLeftBtn.addEventListener('click', () => {
+            departmentsContainer.scrollBy({
+                left: -200,
+                behavior: 'smooth'
+            });
+        });
+        
+        scrollRightBtn.addEventListener('click', () => {
+            departmentsContainer.scrollBy({
+                left: 200,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Department Selection
+        document.querySelectorAll('.department-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const userType = localStorage.getItem('userType');
+                const department = card.getAttribute('data-dept');
+                localStorage.setItem('department', department);
+                
+                if (userType === 'employee') {
+                    showPage('employee-dashboard-page');
+                } else {
+                    showPage('trainee-dashboard-page');
+                }
+            });
+        });
+        
+        // Employee Dashboard Scrolling
+        const employeeDashboardContent = document.getElementById('employee-dashboard-content');
+        const employeeScrollUpBtn = document.getElementById('dashboard-scroll-up');
+        const employeeScrollDownBtn = document.getElementById('dashboard-scroll-down');
+        
+        employeeScrollUpBtn.addEventListener('click', () => {
+            employeeDashboardContent.scrollBy({
+                top: -100,
+                behavior: 'smooth'
+            });
+        });
+        
+        employeeScrollDownBtn.addEventListener('click', () => {
+            employeeDashboardContent.scrollBy({
+                top: 100,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Trainee Dashboard Scrolling
+        const traineeDashboardContent = document.getElementById('trainee-dashboard-content');
+        const traineeScrollUpBtn = document.getElementById('trainee-dashboard-scroll-up');
+        const traineeScrollDownBtn = document.getElementById('trainee-dashboard-scroll-down');
+        
+        traineeScrollUpBtn.addEventListener('click', () => {
+            traineeDashboardContent.scrollBy({
+                top: -100,
+                behavior: 'smooth'
+            });
+        });
+        
+        traineeScrollDownBtn.addEventListener('click', () => {
+            traineeDashboardContent.scrollBy({
+                top: 100,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Employee File Upload
+        const fileUploadArea = document.getElementById('file-upload-area');
+        const fileInput = document.getElementById('file-input');
+        const fileList = document.getElementById('file-list');
+        
+        fileUploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+        
+        fileUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUploadArea.style.borderColor = 'var(--primary-color)';
+            fileUploadArea.style.background = 'rgba(46, 139, 87, 0.05)';
+        });
+        
+        fileUploadArea.addEventListener('dragleave', () => {
+            fileUploadArea.style.borderColor = 'var(--light-border)';
+            fileUploadArea.style.background = 'transparent';
+        });
+        
+        fileUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUploadArea.style.borderColor = 'var(--light-border)';
+            fileUploadArea.style.background = 'transparent';
+            
+            const files = e.dataTransfer.files;
+            handleFiles(files, fileList);
+        });
+        
+        fileInput.addEventListener('change', (e) => {
+            const files = e.target.files;
+            handleFiles(files, fileList);
+        });
+        
+        // Trainee File Upload
+        const traineeFileUploadArea = document.getElementById('trainee-file-upload-area');
+        const traineeFileInput = document.getElementById('trainee-file-input');
+        const traineeFileList = document.getElementById('trainee-file-list');
+        
+        traineeFileUploadArea.addEventListener('click', () => {
+            traineeFileInput.click();
+        });
+        
+        traineeFileUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            traineeFileUploadArea.style.borderColor = 'var(--primary-color)';
+            traineeFileUploadArea.style.background = 'rgba(46, 139, 87, 0.05)';
+        });
+        
+        traineeFileUploadArea.addEventListener('dragleave', () => {
+            traineeFileUploadArea.style.borderColor = 'var(--light-border)';
+            traineeFileUploadArea.style.background = 'transparent';
+        });
+        
+        traineeFileUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            traineeFileUploadArea.style.borderColor = 'var(--light-border)';
+            traineeFileUploadArea.style.background = 'transparent';
+            
+            const files = e.dataTransfer.files;
+            handleFiles(files, traineeFileList);
+        });
+        
+        traineeFileInput.addEventListener('change', (e) => {
+            const files = e.target.files;
+            handleFiles(files, traineeFileList);
+        });
+        
+        function handleFiles(files, fileListElement) {
+            fileListElement.innerHTML = '';
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.innerHTML = `
+                    <div class="file-name">
+                        <i class="fas fa-file"></i> ${file.name}
+                    </div>
+                    <div class="file-size">${(file.size / 1024).toFixed(2)} KB</div>
+                `;
+                fileListElement.appendChild(fileItem);
+            }
+        }
+        
+        // Post Form
+        document.getElementById('post-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = document.getElementById('post-title').value;
+            const content = document.getElementById('post-content').value;
+            
+            if (title && content) {
+                alert(currentLang === 'en' ? 'Post published successfully!' : 'تم نشر المنشور بنجاح!');
+                document.getElementById('post-title').value = '';
+                document.getElementById('post-content').value = '';
+            }
+        });
+        
+        // Department Contact
+        document.querySelectorAll('.department-contact-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const dept = btn.getAttribute('data-dept');
+                const deptName = currentLang === 'en' ? btn.textContent : btn.getAttribute('data-ar');
+                alert(currentLang === 'en' ? `Opening chat with ${deptName} department` : `سيتم فتح نافذة محادثة مع إدارة ${deptName}`);
+            });
+        });
+        
+        // Video Play
+        document.querySelectorAll('.video-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const videoUrl = card.getAttribute('data-video');
+                window.open(videoUrl, '_blank');
+            });
+        });
+        
+        // AI Assistant
+        const aiAssistant = document.getElementById('ai-assistant');
+        const aiChat = document.getElementById('ai-chat');
+        const aiChatClose = document.getElementById('ai-chat-close');
+        const aiChatMessages = document.getElementById('ai-chat-messages');
+        const aiChatInput = document.getElementById('ai-chat-input');
+        const aiSendBtn = document.getElementById('ai-send-btn');
+        
+        aiAssistant.addEventListener('click', () => {
+            aiChat.classList.add('active');
+        });
+        
+        aiChatClose.addEventListener('click', () => {
+            aiChat.classList.remove('active');
+        });
+        
+        function addAIMessage(message, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `ai-message ${isUser ? 'user' : 'ai'}`;
+            messageDiv.textContent = message;
+            aiChatMessages.appendChild(messageDiv);
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+        }
+        
+        function sendAIMessage() {
+            const message = aiChatInput.value.trim();
+            if (message) {
+                addAIMessage(message, true);
+                aiChatInput.value = '';
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    const responses = {
+                        en: [
+                            'Thank you for your question. I will help you as soon as possible.',
+                            'This is a great question! Let me find the right information for you.',
+                            'Based on your question, I suggest contacting the relevant department.',
+                            'You can find the information you need in the training resources section.',
+                            'I will forward your question to the company officials for an accurate answer.'
+                        ],
+                        ar: [
+                            'شكراً لسؤالك. سأقوم بمساعدتك في أقرب وقت ممكن.',
+                            'هذا سؤال ممتاز! دعني أبحث عن المعلومات المناسبة لك.',
+                            'بناءً على سؤالك، أقترح عليك التواصل مع الإدارة المختصة.',
+                            'يمكنك العثور على المعلومات التي تحتاجها في قسم الموارد التعليمية.',
+                            'سأقوم بتوجيه سؤالك إلى المسؤولين في الشركة للحصول على إجابة دقيقة.'
+                        ]
+                    };
+                    
+                    const langResponses = responses[currentLang];
+                    const randomResponse = langResponses[Math.floor(Math.random() * langResponses.length)];
+                    addAIMessage(randomResponse);
+                }, 1000);
+            }
+        }
+        
+        aiSendBtn.addEventListener('click', sendAIMessage);
+        
+        aiChatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendAIMessage();
+            }
+        });
+    </script>
+</body>
+</html>
