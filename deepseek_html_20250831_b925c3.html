@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إيجاس - التسجيل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --accent-color: #3498db;
+            --text-color: #2c3e50;
+            --light-text: #ecf0f1;
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
+            --border-color: #ddd;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --hover-color: #27ae60;
+        }
+
+        .dark-mode {
+            --primary-color: #2ecc71;
+            --secondary-color: #27ae60;
+            --text-color: #ecf0f1;
+            --bg-color: #1a1a1a;
+            --card-bg: #2d2d2d;
+            --border-color: #444;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --hover-color: #2ecc71;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f9f9f9 0%, #e8f5e9 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="500" height="300" viewBox="0 0 500 300"><rect width="500" height="300" fill="rgba(255,255,255,0.1)"/><text x="50%" y="50%" font-size="40" text-anchor="middle" dominant-baseline="middle" opacity="0.05" fill="%232ecc71" font-weight="bold">EGYPTIAN NATURAL GAS</text><text x="50%" y="65%" font-size="25" text-anchor="middle" dominant-baseline="middle" opacity="0.05" fill="%2327ae60" font-weight="bold">HOLDING COMPANY</text></svg>');
+            background-repeat: repeat;
+            background-size: 500px;
+            z-index: -1;
+        }
+
+        .dark-mode::before {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="500" height="300" viewBox="0 0 500 300"><rect width="500" height="300" fill="rgba(0,0,0,0.1)"/><text x="50%" y="50%" font-size="40" text-anchor="middle" dominant-baseline="middle" opacity="0.08" fill="%232ecc71" font-weight="bold">EGYPTIAN NATURAL GAS</text><text x="50%" y="65%" font-size="25" text-anchor="middle" dominant-baseline="middle" opacity="0.08" fill="%2327ae60" font-weight="bold">HOLDING COMPANY</text></svg>');
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-left: 10px;
+            opacity: 0.9;
+        }
+
+        .logo h1 {
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .dark-mode .logo h1 {
+            color: var(--primary-color);
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin: 20px auto;
+            max-width: 500px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+        }
+
+        .dark-mode .card {
+            background-color: rgba(45, 45, 45, 0.95);
+        }
+
+        .card h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            font-size: 28px;
+        }
+
+        .dark-mode .card h2 {
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-size: 16px;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .form-options a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .dark-mode .form-options a {
+            color: var(--primary-color);
+        }
+
+        .form-options a:hover {
+            text-decoration: underline;
+        }
+
+        .options-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .option-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            width: 200px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .dark-mode .option-card {
+            background-color: rgba(45, 45, 45, 0.95);
+        }
+
+        .option-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .option-card i {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .dark-mode .option-card i {
+            color: var(--primary-color);
+        }
+
+        .departments {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .department {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 20px;
+            width: 160px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .dark-mode .department {
+            background-color: rgba(45, 45, 45, 0.95);
+        }
+
+        .department:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .department i {
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .dark-mode .department i {
+            color: var(--primary-color);
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .dashboard-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s;
+        }
+
+        .dark-mode .dashboard-card {
+            background-color: rgba(45, 45, 45, 0.95);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dashboard-card h3 {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .dark-mode .dashboard-card h3 {
+            color: var(--primary-color);
+        }
+
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(46, 204, 113, 0.05);
+        }
+
+        .post-area {
+            margin-bottom: 15px;
+        }
+
+        .post-area textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            min-height: 120px;
+            resize: vertical;
+            font-size: 16px;
+        }
+
+        .post-area textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border-radius: 10px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .ai-assistant {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            border-radius: 50%;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+
+        .ai-assistant:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .admin-panel {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin: 20px auto;
+            max-width: 600px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+        }
+
+        .dark-mode .admin-panel {
+            background-color: rgba(45, 45, 45, 0.95);
+        }
+
+        .admin-panel h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            font-size: 22px;
+        }
+
+        .dark-mode .admin-panel h3 {
+            color: var(--primary-color);
+        }
+
+        .user-info {
+            background-color: rgba(46, 204, 113, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RTL and LTR support */
+        [dir="rtl"] {
+            text-align: right;
+        }
+
+        [dir="ltr"] {
+            text-align: left;
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .options-container, .departments, .dashboard {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .option-card, .department {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .controls {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            body::before {
+                background-size: 300px;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .logo {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'><text x='50%' y='50%' font-size='24' text-anchor='middle' dominant-baseline='middle' fill='%232ecc71'>EGAS</text></svg>" alt="EGAS Logo">
+                <h1>نظام إيجاس</h1>
+            </div>
+            <div class="controls">
+                <button class="btn" id="theme-toggle">
+                    <i class="fas fa-moon"></i> وضع الظلام
+                </button>
+                <button class="btn" id="language-toggle">
+                    <i class="fas fa-globe"></i> English
+                </button>
+            </div>
+        </header>
+
+        <!-- Login Page -->
+        <div id="login-page" class="page active">
+            <div class="card">
+                <h2>تسجيل الدخول</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">كلمة المرور</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <div class="form-options">
+                        <label>
+                            <input type="checkbox"> تذكرني
+                        </label>
+                        <a href="#">نسيت كلمة المرور؟</a>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">
+                        <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                    </button>
+                </form>
+                <p style="text-align: center; margin-top: 20px;">
+                    ليس لديك حساب؟ <a href="#" id="signup-link">إنشاء حساب</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Signup Page -->
+        <div id="signup-page" class="page">
+            <div class="card">
+                <h2>إنشاء حساب جديد</h2>
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label for="fullname">الاسم بالكامل</label>
+                        <input type="text" id="fullname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">اسم المستخدم</label>
+                        <input type="text" id="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">البريد الإلكتروني</label>
+                        <input type="email" id="signup-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">كلمة المرور</label>
+                        <input type="password" id="signup-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">تأكيد كلمة المرور</label>
+                        <input type="password" id="confirm-password" required>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">
+                        <i class="fas fa-user-plus"></i> إنشاء الحساب
+                    </button>
+                </form>
+                <div class="navigation">
+                    <button class="btn btn-outline" id="back-to-login-from-signup">
+                        <i class="fas fa-arrow-right"></i> العودة لتسجيل الدخول
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Assignment Page -->
+        <div id="admin-page" class="page">
+            <div class="admin-panel">
+                <h3>تحديد نوع المستخدم والإدارة</h3>
+                
+                <div class="user-info">
+                    <h4>معلومات المستخدم:</h4>
+                    <p><strong>الاسم:</strong> <span id="user-fullname"></span></p>
+                    <p><strong>اسم المستخدم:</strong> <span id="user-username"></span></p>
+                    <p><strong>البريد الإلكتروني:</strong> <span id="user-email"></span></p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="user-type-select">نوع المستخدم</label>
+                    <select id="user-type-select" class="form-control">
+                        <option value="">-- اختر نوع المستخدم --</option>
+                        <option value="employee">موظف</option>
+                        <option value="trainee">متدرب</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="department-select">الإدارة</label>
+                    <select id="department-select" class="form-control">
+                        <option value="">-- اختر الإدارة --</option>
+                        <option value="it">تقنية المعلومات</option>
+                        <option value="hr">الموارد البشرية</option>
+                        <option value="finance">المالية</option>
+                        <option value="marketing">التسويق</option>
+                        <option value="operations">العمليات</option>
+                    </select>
+                </div>
+                
+                <button type="button" class="btn" id="assign-user" style="width: 100%; margin-top: 20px;">
+                    <i class="fas fa-check"></i> تعيين المستخدم
+                </button>
+                
+                <div class="navigation">
+                    <button class="btn btn-outline" id="back-to-signup">
+                        <i class="fas fa-arrow-right"></i> العودة للتسجيل
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboard-page" class="page">
+            <h2 style="text-align: center;" id="dashboard-title">لوحة التحكم</h2>
+            
+            <div class="user-info">
+                <p><strong>اسم المستخدم:</strong> <span id="dashboard-username"></span></p>
+                <p><strong>نوع المستخدم:</strong> <span id="dashboard-type"></span></p>
+                <p><strong>الإدارة:</strong> <span id="dashboard-department"></span></p>
+            </div>
+            
+            <div class="dashboard">
+                <div class="dashboard-card">
+                    <h3>رفع الملفات</h3>
+                    <div class="upload-area">
+                        <i class="fas fa-cloud-upload-alt" style="font-size: 40px; margin-bottom: 10px; color: var(--secondary-color);"></i>
+                        <p>انقر أو اسحب الملفات هنا لرفعها</p>
+                        <input type="file" style="display: none;">
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3>إنشاء منشور</h3>
+                    <div class="post-area">
+                        <textarea placeholder="اكتب منشورك هنا..."></textarea>
+                    </div>
+                    <button class="btn">
+                        <i class="fas fa-paper-plane"></i> نشر
+                    </button>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3>التواصل مع الإدارات</h3>
+                    <select style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; background-color: var(--card-bg); color: var(--text-color); border: 2px solid var(--border-color);">
+                        <option>اختر الإدارة</option>
+                        <option>تقنية المعلومات</option>
+                        <option>الموارد البشرية</option>
+                        <option>المالية</option>
+                        <option>التسويق</option>
+                        <option>العمليات</option>
+                    </select>
+                    <textarea placeholder="اكتب رسالتك هنا..." style="width: 100%; padding: 12px; border-radius: 8px; background-color: var(--card-bg); color: var(--text-color); border: 2px solid var(--border-color); min-height: 100px; margin-bottom: 15px;"></textarea>
+                    <button class="btn">
+                        <i class="fas fa-envelope"></i> إرسال
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Trainee Specific Content -->
+            <div id="trainee-content" style="display: none;">
+                <h3 style="margin: 30px 0 20px; color: var(--secondary-color); text-align: center;">فيديوهات تدريبية</h3>
+                <div class="dashboard">
+                    <div class="dashboard-card">
+                        <h3>فيديو تدريبي 1</h3>
+                        <div class="video-container">
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/hvIatX1UpBw" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>فيديو تدريبي 2</h3>
+                        <div class="video-container">
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/-bzzFWE3o_o" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="navigation">
+                <button class="btn btn-outline" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Assistant Button -->
+    <div class="ai-assistant">
+        <i class="fas fa-robot" style="font-size: 30px;"></i>
+    </div>
+
+    <script>
+        // DOM Elements
+        const themeToggle = document.getElementById('theme-toggle');
+        const languageToggle = document.getElementById('language-toggle');
+        const pages = document.querySelectorAll('.page');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const signupLink = document.getElementById('signup-link');
+        const backToLogin = document.getElementById('back-to-login-from-signup');
+        const backToSignup = document.getElementById('back-to-signup');
+        const assignUserBtn = document.getElementById('assign-user');
+        const logoutBtn = document.getElementById('logout-btn');
+        const traineeContent = document.getElementById('trainee-content');
+        const dashboardTitle = document.getElementById('dashboard-title');
+        
+        // User data
+        let userData = {
+            fullname: '',
+            username: '',
+            email: '',
+            type: '',
+            department: ''
+        };
+
+        // Current state
+        let currentPage = 'login-page';
+        let isDarkMode = false;
+        let isEnglish = false;
+
+        // Theme Toggle
+        themeToggle.addEventListener('click', () => {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            themeToggle.innerHTML = isDarkMode ? 
+                '<i class="fas fa-sun"></i> وضع النور' : 
+                '<i class="fas fa-moon"></i> وضع الظلام';
+        });
+
+        // Language Toggle
+        languageToggle.addEventListener('click', () => {
+            isEnglish = !isEnglish;
+            document.documentElement.dir = isEnglish ? 'ltr' : 'rtl';
+            document.documentElement.lang = isEnglish ? 'en' : 'ar';
+            languageToggle.innerHTML = isEnglish ? 
+                '<i class="fas fa-globe"></i> العربية' : 
+                '<i class="fas fa-globe"></i> English';
+            
+            // Update all text based on language
+            updateLanguage();
+        });
+
+        // Navigation Functions
+        function showPage(pageId) {
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            currentPage = pageId;
+        }
+
+        // Login Form Submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // في تطبيق حقيقي، هنا سيتم التحقق من بيانات المستخدم
+            showPage('dashboard-page');
+            updateDashboard();
+        });
+
+        // Signup Link
+        signupLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage('signup-page');
+        });
+
+        // Back to Login from Signup
+        backToLogin.addEventListener('click', () => {
+            showPage('login-page');
+        });
+
+        // Back to Signup from Admin
+        backToSignup.addEventListener('click', () => {
+            showPage('signup-page');
+        });
+
+        // Signup Form Submission
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // الحصول على بيانات المستخدم
+            userData.fullname = document.getElementById('fullname').value;
+            userData.username = document.getElementById('username').value;
+            userData.email = document.getElementById('signup-email').value;
+            
+            // التحقق من تطابق كلمات المرور
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                alert('كلمات المرور غير متطابقة');
+                return;
+            }
+            
+            // عرض بيانات المستخدم في صفحة المدير
+            document.getElementById('user-fullname').textContent = userData.fullname;
+            document.getElementById('user-username').textContent = userData.username;
+            document.getElementById('user-email').textContent = userData.email;
+            
+            // الانتقال إلى صفحة المدير
+            showPage('admin-page');
+        });
+
+        // Assign User
+        assignUserBtn.addEventListener('click', () => {
+            const userType = document.getElementById('user-type-select').value;
+            const department = document.getElementById('department-select').value;
+            
+            if (!userType || !department) {
+                alert('يرجى اختيار نوع المستخدم والإدارة');
+                return;
+            }
+            
+            userData.type = userType;
+            userData.department = department;
+            
+            // الانتقال إلى لوحة التحكم
+            showPage('dashboard-page');
+            updateDashboard();
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            // إعادة تعيين بيانات المستخدم
+            userData = {
+                fullname: '',
+                username: '',
+                email: '',
+                type: '',
+                department: ''
+            };
+            
+            // إعادة تعيين النماذج
+            loginForm.reset();
+            signupForm.reset();
+            document.getElementById('user-type-select').value = '';
+            document.getElementById('department-select').value = '';
+            
+            // العودة إلى صفحة تسجيل الدخول
+            showPage('login-page');
+        });
+
+        // Update Dashboard with user data
+        function updateDashboard() {
+            document.getElementById('dashboard-username').textContent = userData.username;
+            document.getElementById('dashboard-type').textContent = userData.type === 'employee' ? 'موظف' : 'متدرب';
+            document.getElementById('dashboard-department').textContent = getDepartmentName(userData.department);
+            
+            dashboardTitle.textContent = `لوحة تحكم ${userData.type === 'employee' ? 'موظف' : 'متدرب'} - قسم ${getDepartmentName(userData.department)}`;
+            
+            // Show trainee content only for IT department trainees
+            if (userData.type === 'trainee' && userData.department === 'it') {
+                traineeContent.style.display = 'block';
+            } else {
+                traineeContent.style.display = 'none';
+            }
+        }
+
+        // Helper function to get department name in Arabic
+        function getDepartmentName(dept) {
+            const departments = {
+                'it': 'تقنية المعلومات',
+                'hr': 'الموارد البشرية',
+                'finance': 'المالية',
+                'marketing': 'التسويق',
+                'operations': 'العمليات'
+            };
+            return departments[dept] || dept;
+        }
+
+        // Update all text based on selected language
+        function updateLanguage() {
+            // سيتم تنفيذ هذا في تطبيق كامل
+        }
+
+        // Initialize file upload functionality
+        const uploadArea = document.querySelector('.upload-area');
+        const fileInput = document.querySelector('.upload-area input[type="file"]');
+        
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = 'var(--primary-color)';
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.borderColor = 'var(--border-color)';
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = 'var(--border-color)';
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                alert('الملف جاهز للرفع');
+            }
+        });
+
+        // AI Assistant Button
+        document.querySelector('.ai-assistant').addEventListener('click', () => {
+            alert('كيف يمكنني مساعدتك اليوم؟');
+        });
+    </script>
+</body>
+</html>
