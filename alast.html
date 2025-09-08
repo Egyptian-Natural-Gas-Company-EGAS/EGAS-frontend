@@ -1359,9 +1359,9 @@
             <i class="fas fa-home"></i>
             <span class="sidebar-tooltip">الرئيسية</span>
         </div>
-        <div class="sidebar-icon" id="sidebar-dashboard">
-            <i class="fas fa-tachometer-alt"></i>
-            <span class="sidebar-tooltip">لوحة التحكم</span>
+        <div class="sidebar-icon" id="sidebar-add">
+            <i class="fas fa-plus"></i>
+            <span class="sidebar-tooltip">إضافة</span>
         </div>
         <div class="sidebar-icon" id="sidebar-notifications">
             <i class="fas fa-bell"></i>
@@ -1778,110 +1778,113 @@
                     </div>
                 </div>
                 
-                <div class="grid">
-                    <!-- File Upload Section -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title" id="upload-title">رفع الملفات</h3>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" id="choose-file-label">اختر ملف</label>
-                            <input type="file" class="form-input" id="file-upload">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" id="file-desc-label">وصف الملف</label>
-                            <input type="text" class="form-input" id="file-description" placeholder="أدخل وصفاً للملف">
-                        </div>
-                        <button class="btn btn-primary" id="upload-file-btn">رفع الملف</button>
-                        
-                        <div style="margin-top: 20px;">
-                            <h4 id="uploaded-files-title">ملفاتك المرفوعة</h4>
-                            <div id="employee-files">
-                                <div class="file-item">
-                                    <div class="file-icon">
-                                        <i class="fas fa-file-pdf"></i>
+                <!-- Add Content Section (Hidden by default) -->
+                <div id="add-content-section" class="hidden">
+                    <div class="grid">
+                        <!-- File Upload Section -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title" id="upload-title">رفع الملفات</h3>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" id="choose-file-label">اختر ملف</label>
+                                <input type="file" class="form-input" id="file-upload">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" id="file-desc-label">وصف الملف</label>
+                                <input type="text" class="form-input" id="file-description" placeholder="أدخل وصفاً للملف">
+                            </div>
+                            <button class="btn btn-primary" id="upload-file-btn">رفع الملف</button>
+                            
+                            <div style="margin-top: 20px;">
+                                <h4 id="uploaded-files-title">ملفاتك المرفوعة</h4>
+                                <div id="employee-files">
+                                    <div class="file-item">
+                                        <div class="file-icon">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </div>
+                                        <div class="file-details">
+                                            <div class="file-name">تقرير الأداء الشهري</div>
+                                            <div class="file-meta">PDF • 1.8 MB • تم الإضافة: 15/05/2023</div>
+                                        </div>
                                     </div>
-                                    <div class="file-details">
-                                        <div class="file-name">تقرير الأداء الشهري</div>
-                                        <div class="file-meta">PDF • 1.8 MB • تم الإضافة: 15/05/2023</div>
-                                    </div>
-                                </div>
-                                <div class="file-item">
-                                    <div class="file-icon">
-                                        <i class="fas fa-file-excel"></i>
-                                    </div>
-                                    <div class="file-details">
-                                        <div class="file-name">جدول المهام الأسبوعي</div>
-                                        <div class="file-meta">XLSX • 0.7 MB • تم الإضافة: 10/05/2023</div>
+                                    <div class="file-item">
+                                        <div class="file-icon">
+                                            <i class="fas fa-file-excel"></i>
+                                        </div>
+                                        <div class="file-details">
+                                            <div class="file-name">جدول المهام الأسبوعي</div>
+                                            <div class="file-meta">XLSX • 0.7 MB • تم الإضافة: 10/05/2023</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- Create Post Section -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title" id="create-post-title">إنشاء منشور</h3>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" id="post-title-label">عنوان المنشور</label>
+                                <input type="text" class="form-input" id="post-title" placeholder="أدخل عنوان المنشور">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" id="post-content-label">محتوى المنشور</label>
+                                <textarea class="form-input" id="post-content" rows="4" placeholder="أدخل محتوى المنشور"></textarea>
+                            </div>
+                            <button class="btn btn-primary" id="create-post-btn">نشر المنشور</button>
+                        </div>
                     </div>
                     
-                    <!-- Create Post Section -->
+                    <!-- Communication Section -->
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title" id="create-post-title">إنشاء منشور</h3>
+                            <h3 class="card-title" id="comm-title">التواصل بين الإدارات</h3>
                         </div>
+                        
                         <div class="form-group">
-                            <label class="form-label" id="post-title-label">عنوان المنشور</label>
-                            <input type="text" class="form-input" id="post-title" placeholder="أدخل عنوان المنشور">
+                            <label class="form-label" id="select-dept-label">اختر الإدارة</label>
+                            <select class="form-input" id="department-select">
+                                <option value="">-- اختر الإدارة --</option>
+                                <option value="1">نظم المعلومات والاتصالات</option>
+                                <option value="2">حماية البيئة</option>
+                                <option value="3">أنشطة المسؤولية المجتمعية</option>
+                                <option value="4">المكتب الفني والمشاريع الخاصة</option>
+                                <option value="5">المراجعة والمتابعة</option>
+                                <option value="6">العلاقات العامة</option>
+                                <option value="7">العلاقات الدولية</option>
+                                <option value="8">العلاقات الحكومية</option>
+                                <option value="9">العقود</option>
+                                <option value="10">الشؤون الطبية والعلاجية</option>
+                                <option value="11">السلامة والصحة المهنية</option>
+                                <option value="12">الأمن</option>
+                                <option value="13">الأمانة العامة لمجلس الإدارة</option>
+                                <option value="14">الإعلام</option>
+                                <option value="15">الاستراتيجيات ودعم اتخاذ القرار</option>
+                                <option value="16">تحول الطاقة والاستدامة</option>
+                                <option value="17">العمليات والشبكات</option>
+                                <option value="18">الشؤون المالية</option>
+                                <option value="19">الشؤون القانونية</option>
+                                <option value="20">الشؤون الإدارية</option>
+                                <option value="21">الرقابة على شركات الأجنبي</option>
+                                <option value="22">التخطيط ومشاريع الغاز</option>
+                                <option value="23">الإدارة الداخلية في شؤون الاقتصاد</option>
+                                <option value="24">التجارة الخارجية</option>
+                                <option value="25">التبعية لرئيس مجلس الإدارة</option>
+                                <option value="26">الإنتاج وتنمية الحقول</option>
+                                <option value="27">الاتفاقيات والاستكشاف</option>
+                            </select>
                         </div>
+                        
                         <div class="form-group">
-                            <label class="form-label" id="post-content-label">محتوى المنشور</label>
-                            <textarea class="form-input" id="post-content" rows="4" placeholder="أدخل محتوى المنشور"></textarea>
+                            <label class="form-label" id="message-label">محتوى الرسالة</label>
+                            <textarea class="form-input" id="message-content" rows="3" placeholder="أدخل محتوى الرسالة"></textarea>
                         </div>
-                        <button class="btn btn-primary" id="create-post-btn">نشر المنشور</button>
+                        
+                        <button class="btn btn-primary" id="send-message-btn">إرسال الرسالة</button>
                     </div>
-                </div>
-                
-                <!-- Communication Section -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title" id="comm-title">التواصل بين الإدارات</h3>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" id="select-dept-label">اختر الإدارة</label>
-                        <select class="form-input" id="department-select">
-                            <option value="">-- اختر الإدارة --</option>
-                            <option value="1">نظم المعلومات والاتصالات</option>
-                            <option value="2">حماية البيئة</option>
-                            <option value="3">أنشطة المسؤولية المجتمعية</option>
-                            <option value="4">المكتب الفني والمشاريع الخاصة</option>
-                            <option value="5">المراجعة والمتابعة</option>
-                            <option value="6">العلاقات العامة</option>
-                            <option value="7">العلاقات الدولية</option>
-                            <option value="8">العلاقات الحكومية</option>
-                            <option value="9">العقود</option>
-                            <option value="10">الشؤون الطبية والعلاجية</option>
-                            <option value="11">السلامة والصحة المهنية</option>
-                            <option value="12">الأمن</option>
-                            <option value="13">الأمانة العامة لمجلس الإدارة</option>
-                            <option value="14">الإعلام</option>
-                            <option value="15">الاستراتيجيات ودعم اتخاذ القرار</option>
-                            <option value="16">تحول الطاقة والاستدامة</option>
-                            <option value="17">العمليات والشبكات</option>
-                            <option value="18">الشؤون المالية</option>
-                            <option value="19">الشؤون القانونية</option>
-                            <option value="20">الشؤون الإدارية</option>
-                            <option value="21">الرقابة على شركات الأجنبي</option>
-                            <option value="22">التخطيط ومشاريع الغاز</option>
-                            <option value="23">الإدارة الداخلية في شؤون الاقتصاد</option>
-                            <option value="24">التجارة الخارجية</option>
-                            <option value="25">التبعية لرئيس مجلس الإدارة</option>
-                            <option value="26">الإنتاج وتنمية الحقول</option>
-                            <option value="27">الاتفاقيات والاستكشاف</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" id="message-label">محتوى الرسالة</label>
-                        <textarea class="form-input" id="message-content" rows="3" placeholder="أدخل محتوى الرسالة"></textarea>
-                    </div>
-                    
-                    <button class="btn btn-primary" id="send-message-btn">إرسال الرسالة</button>
                 </div>
                 
                 <!-- Home Feed Section -->
@@ -2821,6 +2824,7 @@
         const sidebar = document.getElementById('sidebar');
         const notificationsPanel = document.getElementById('notifications-panel');
         const notificationBadge = document.getElementById('notification-count');
+        const addContentSection = document.getElementById('add-content-section');
         
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
@@ -2851,7 +2855,7 @@
             
             // Sidebar navigation
             document.getElementById('sidebar-home').addEventListener('click', handleHomeLink);
-            document.getElementById('sidebar-dashboard').addEventListener('click', handleDashboardLink);
+            document.getElementById('sidebar-add').addEventListener('click', toggleAddContent);
             document.getElementById('sidebar-notifications').addEventListener('click', toggleNotificationsPanel);
             document.getElementById('sidebar-settings').addEventListener('click', handleSettingsLink);
             document.getElementById('sidebar-profile').addEventListener('click', handleProfileLink);
@@ -2951,6 +2955,18 @@
                 addNewNotification();
             }, 10000);
         });
+        
+        // Toggle Add Content Section
+        function toggleAddContent() {
+            if (currentUserType === 'employee') {
+                const isVisible = addContentSection.classList.contains('hidden');
+                if (isVisible) {
+                    addContentSection.classList.remove('hidden');
+                } else {
+                    addContentSection.classList.add('hidden');
+                }
+            }
+        }
         
         // Login handler
         function handleLogin(e) {
