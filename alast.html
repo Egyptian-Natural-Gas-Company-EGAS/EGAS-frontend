@@ -1,0 +1,3903 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EGAS - Egyptian Natural Gas Holding Company</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #10b981;
+            --secondary-color: #047857;
+            --accent-color: #065f46;
+            --light-color: #f3f4f6;
+            --dark-color: #1f2937;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --white-color: #ffffff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --sidebar-width: 70px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f9fafb;
+            color: #333;
+            line-height: 1.6;
+            transition: var(--transition);
+            padding-right: var(--sidebar-width);
+        }
+        body.dark-mode {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 0;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-image: url('https://z-cdn-media.chatglm.cn/files/624c7cf2-9426-4fa6-a3b8-08f6ee5b961c_WhatsApp%20Image%202025-08-12%20at%2010.32.33_4ab4dc38.jpg?auth_key=1788360030-f02054b37b6046bfbcb98a358cfde018-0-61cd752c138aa9a63f39d445d9ef73a2');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: var(--white-color);
+            background-blend-mode: normal;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .logo i {
+            color: var(--primary-color);
+            font-size: 2rem;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        .nav-link:hover {
+            background-color: rgba(16, 185, 129, 0.2);
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--white-color);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid var(--primary-color);
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+        .btn-secondary {
+            background-color: #e5e7eb;
+            color: var(--dark-color);
+        }
+        .btn-secondary:hover {
+            background-color: #d1d5db;
+        }
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+        .btn-success:hover {
+            background-color: var(--secondary-color);
+        }
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+        .btn-back {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            margin-bottom: 20px;
+        }
+        .btn-back:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+        body.dark-mode .card {
+            background-color: #374151;
+            color: #f3f4f6;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        body.dark-mode .card-header {
+            border-bottom-color: #4b5563;
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .form-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        body.dark-mode .form-input {
+            background-color: #4b5563;
+            border-color: #6b7280;
+            color: #f3f4f6;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .dashboard-section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .file-item, .video-item, .task-item, .certificate-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: var(--border-radius);
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+        body.dark-mode .file-item, 
+        body.dark-mode .video-item, 
+        body.dark-mode .task-item, 
+        body.dark-mode .certificate-item {
+            border-color: #4b5563;
+        }
+        .file-item:hover, .video-item:hover, .task-item:hover, .certificate-item:hover {
+            background-color: #f3f4f6;
+        }
+        body.dark-mode .file-item:hover, 
+        body.dark-mode .video-item:hover, 
+        body.dark-mode .task-item:hover, 
+        body.dark-mode .certificate-item:hover {
+            background-color: #4b5563;
+        }
+        .file-icon, .video-icon, .task-icon, .certificate-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-left: 15px;
+            font-size: 1.2rem;
+        }
+        .file-icon {
+            background-color: #d1fae5;
+            color: var(--primary-color);
+        }
+        .video-icon {
+            background-color: #ffedd5;
+            color: #f97316;
+        }
+        .task-icon {
+            background-color: #dcfce7;
+            color: #16a34a;
+        }
+        .certificate-icon {
+            background-color: #fef3c7;
+            color: #d97706;
+        }
+        .file-details, .video-details, .task-details, .certificate-details {
+            flex: 1;
+        }
+        .file-name, .video-title, .task-title, .certificate-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .file-meta, .video-meta, .task-meta, .certificate-meta {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+        body.dark-mode .file-meta, 
+        body.dark-mode .video-meta, 
+        body.dark-mode .task-meta, 
+        body.dark-mode .certificate-meta {
+            color: #9ca3af;
+        }
+        .post-item {
+            border: 1px solid #e5e7eb;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+        body.dark-mode .post-item {
+            border-color: #4b5563;
+        }
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .post-author {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        .post-department {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+        body.dark-mode .post-department {
+            color: #9ca3af;
+        }
+        .post-content {
+            margin-bottom: 15px;
+        }
+        .post-actions {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9rem;
+        }
+        .post-action {
+            color: #6b7280;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        body.dark-mode .post-action {
+            color: #9ca3af;
+        }
+        .post-action:hover {
+            color: var(--primary-color);
+        }
+        .comments-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #e5e7eb;
+        }
+        body.dark-mode .comments-section {
+            border-top-color: #4b5563;
+        }
+        .comment-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9fafb;
+            border-radius: var(--border-radius);
+        }
+        body.dark-mode .comment-item {
+            background-color: #4b5563;
+        }
+        .comment-author {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .comment-content {
+            font-size: 0.9rem;
+        }
+        .comment-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+            font-size: 0.8rem;
+        }
+        .comment-action {
+            color: #6b7280;
+            cursor: pointer;
+        }
+        body.dark-mode .comment-action {
+            color: #9ca3af;
+        }
+        .comment-action:hover {
+            color: var(--primary-color);
+        }
+        .replies-section {
+            margin-right: 20px;
+            margin-top: 10px;
+        }
+        .reply-item {
+            margin-bottom: 8px;
+            padding: 8px;
+            background-color: #f3f4f6;
+            border-radius: var(--border-radius);
+        }
+        body.dark-mode .reply-item {
+            background-color: #4b5563;
+        }
+        .ai-assistant {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--box-shadow);
+            z-index: 1000;
+            font-size: 1.5rem;
+        }
+        .ai-assistant:hover {
+            background-color: var(--secondary-color);
+        }
+        .ai-chat {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 450px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+        }
+        body.dark-mode .ai-chat {
+            background-color: #374151;
+        }
+        .ai-chat-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ai-chat-close {
+            cursor: pointer;
+        }
+        .ai-chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        .ai-chat-footer {
+            padding: 15px;
+            border-top: 1px solid #e5e7eb;
+        }
+        body.dark-mode .ai-chat-footer {
+            border-top-color: #4b5563;
+        }
+        .ai-message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            max-width: 80%;
+        }
+        .ai-message.user {
+            background-color: #d1fae5;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        body.dark-mode .ai-message.user {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        .ai-message.ai {
+            background-color: #f3f4f6;
+            align-self: flex-start;
+        }
+        body.dark-mode .ai-message.ai {
+            background-color: #4b5563;
+            color: #f3f4f6;
+        }
+        .meeting-reminder {
+            background-color: #fef3c7;
+            border: 1px solid #fcd34d;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        body.dark-mode .meeting-reminder {
+            background-color: #451a03;
+            border-color: #fcd34d;
+        }
+        .meeting-icon {
+            color: #d97706;
+            font-size: 1.5rem;
+        }
+        .meeting-details h4 {
+            margin-bottom: 5px;
+        }
+        .meeting-details p {
+            font-size: 0.9rem;
+            color: #78350f;
+        }
+        body.dark-mode .meeting-details p {
+            color: #fcd34d;
+        }
+        .settings-panel {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        body.dark-mode .settings-panel {
+            background-color: #374151;
+        }
+        .settings-group {
+            margin-bottom: 25px;
+        }
+        .settings-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        .settings-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        body.dark-mode .settings-option {
+            border-bottom-color: #4b5563;
+        }
+        .settings-option:last-child {
+            border-bottom: none;
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+        }
+        body.dark-mode .profile-section {
+            border-color: #4b5563;
+        }
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: var(--white-color);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .profile-role {
+            color: #6b7280;
+            margin-bottom: 15px;
+        }
+        body.dark-mode .profile-role {
+            color: #9ca3af;
+        }
+        .profile-stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .profile-stat {
+            text-align: center;
+        }
+        .profile-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        .profile-stat-label {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+        body.dark-mode .profile-stat-label {
+            color: #9ca3af;
+        }
+        .tab-container {
+            margin-bottom: 20px;
+        }
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 15px;
+        }
+        body.dark-mode .tab-buttons {
+            border-bottom-color: #4b5563;
+        }
+        .tab-button {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            color: #6b7280;
+        }
+        body.dark-mode .tab-button {
+            color: #9ca3af;
+        }
+        .tab-button.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .course-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+        body.dark-mode .course-item {
+            border-color: #4b5563;
+        }
+        .course-item:hover {
+            background-color: #f3f4f6;
+        }
+        body.dark-mode .course-item:hover {
+            background-color: #4b5563;
+        }
+        .course-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #d1fae5;
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            font-size: 1.5rem;
+        }
+        .course-details {
+            flex: 1;
+        }
+        .course-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .course-description {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+        body.dark-mode .course-description {
+            color: #9ca3af;
+        }
+        .course-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--success-color);
+            color: white;
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            max-width: 350px;
+        }
+        .notification.show {
+            transform: translateX(0);
+        }
+        .notification.error {
+            background-color: var(--danger-color);
+        }
+        .notification.warning {
+            background-color: var(--warning-color);
+        }
+        .notification-content {
+            flex: 1;
+        }
+        .notification-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .notification-message {
+            font-size: 0.9rem;
+        }
+        .notification-link {
+            color: white;
+            text-decoration: underline;
+            margin-top: 5px;
+            display: inline-block;
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        .modal-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            padding: 25px;
+            position: relative;
+        }
+        body.dark-mode .modal-content {
+            background-color: #374151;
+        }
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+        }
+        body.dark-mode .modal-close {
+            color: #9ca3af;
+        }
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6b7280;
+        }
+        body.dark-mode .empty-state {
+            color: #9ca3af;
+        }
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #d1d5db;
+        }
+        body.dark-mode .empty-state i {
+            color: #4b5563;
+        }
+        .login-container {
+            max-width: 500px;
+            margin: 50px auto;
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .login-header h1 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .login-header p {
+            color: #6b7280;
+        }
+        .login-form {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+        }
+        body.dark-mode .login-form {
+            background-color: #374151;
+        }
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .login-options a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .login-options a:hover {
+            text-decoration: underline;
+        }
+        .department-card {
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .department-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .restricted-department {
+            position: relative;
+        }
+        .restricted-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--danger-color);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: var(--sidebar-width);
+            height: 100%;
+            background-color: var(--primary-color);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 80px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.2rem;
+            position: relative;
+        }
+        
+        .sidebar-icon:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .sidebar-icon.active {
+            background-color: var(--white-color);
+            color: var(--primary-color);
+        }
+        
+        .sidebar-tooltip {
+            position: absolute;
+            right: 70px;
+            background-color: var(--dark-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: var(--border-radius);
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .sidebar-icon:hover .sidebar-tooltip {
+            opacity: 1;
+        }
+        
+        /* Notifications Panel */
+        .notifications-panel {
+            position: fixed;
+            top: 70px;
+            right: 80px;
+            width: 350px;
+            max-height: 500px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            display: none;
+            flex-direction: column;
+            z-index: 999;
+            overflow: hidden;
+        }
+        
+        body.dark-mode .notifications-panel {
+            background-color: #374151;
+        }
+        
+        .notifications-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .notifications-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+        }
+        
+        .notification-item {
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        body.dark-mode .notification-item {
+            border-bottom-color: #4b5563;
+        }
+        
+        .notification-item:hover {
+            background-color: #f3f4f6;
+        }
+        
+        body.dark-mode .notification-item:hover {
+            background-color: #4b5563;
+        }
+        
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+        
+        .notification-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .notification-message {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+        
+        body.dark-mode .notification-message {
+            color: #9ca3af;
+        }
+        
+        .notification-time {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            margin-top: 5px;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--danger-color);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        /* Department Filter */
+        .department-filter {
+            margin-bottom: 20px;
+        }
+        
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .filter-option {
+            padding: 5px 12px;
+            background-color: #f3f4f6;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        body.dark-mode .filter-option {
+            background-color: #4b5563;
+        }
+        
+        .filter-option:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .filter-option.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .filter-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 5px 12px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+        
+        .filter-apply {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .filter-apply:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .filter-reset {
+            background-color: #e5e7eb;
+            color: var(--dark-color);
+        }
+        
+        .filter-reset:hover {
+            background-color: #d1d5db;
+        }
+        
+        /* Home Feed Styles */
+        .home-feed {
+            margin-top: 20px;
+        }
+        
+        .feed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .feed-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .feed-filter {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feed-filter select {
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: var(--border-radius);
+            background-color: white;
+            font-size: 0.9rem;
+        }
+        
+        body.dark-mode .feed-filter select {
+            background-color: #4b5563;
+            border-color: #6b7280;
+            color: #f3f4f6;
+        }
+        
+        .comment-form {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f9fafb;
+            border-radius: var(--border-radius);
+        }
+        
+        body.dark-mode .comment-form {
+            background-color: #4b5563;
+        }
+        
+        .comment-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        body.dark-mode .comment-input {
+            background-color: #374151;
+            border-color: #6b7280;
+            color: #f3f4f6;
+        }
+        
+        .comment-actions-form {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .comment-submit {
+            padding: 6px 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        
+        .comment-submit:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .reply-form {
+            margin-top: 8px;
+            padding: 8px;
+            background-color: #f3f4f6;
+            border-radius: var(--border-radius);
+        }
+        
+        body.dark-mode .reply-form {
+            background-color: #4b5563;
+        }
+        
+        .reply-input {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: var(--border-radius);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+        
+        body.dark-mode .reply-input {
+            background-color: #374151;
+            border-color: #6b7280;
+            color: #f3f4f6;
+        }
+        
+        .reply-actions-form {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .reply-submit {
+            padding: 4px 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        
+        .reply-submit:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .private-message-btn {
+            padding: 4px 8px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        
+        .private-message-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .notification-expanded {
+            max-width: 400px;
+            padding: 20px;
+        }
+        
+        .notification-expanded .notification-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .notification-expanded .notification-message {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .notification-expanded .notification-link {
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .ai-chat {
+                width: 90%;
+                right: 5%;
+            }
+            
+            .login-container {
+                margin: 20px auto;
+            }
+            
+            body {
+                padding-right: 0;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: 60px;
+                top: auto;
+                bottom: 0;
+                right: 0;
+                flex-direction: row;
+                padding-top: 0;
+                padding: 0 10px;
+                justify-content: space-around;
+            }
+            
+            .sidebar-icon {
+                margin-bottom: 0;
+                margin-right: 0;
+            }
+            
+            .notifications-panel {
+                width: 90%;
+                right: 5%;
+                top: auto;
+                bottom: 70px;
+                max-height: 300px;
+            }
+            
+            .notification {
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+            </div>
+            <div class="user-info">
+                <span id="user-name">مستخدم</span>
+                <div class="user-avatar" id="user-avatar">م</div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-icon active" id="sidebar-home">
+            <i class="fas fa-home"></i>
+            <span class="sidebar-tooltip">الرئيسية</span>
+        </div>
+        <div class="sidebar-icon" id="sidebar-dashboard">
+            <i class="fas fa-tachometer-alt"></i>
+            <span class="sidebar-tooltip">لوحة التحكم</span>
+        </div>
+        <div class="sidebar-icon" id="sidebar-notifications">
+            <i class="fas fa-bell"></i>
+            <span class="sidebar-tooltip">الإشعارات</span>
+            <span class="notification-badge" id="notification-count">3</span>
+        </div>
+        <div class="sidebar-icon" id="sidebar-settings">
+            <i class="fas fa-cog"></i>
+            <span class="sidebar-tooltip">الإعدادات</span>
+        </div>
+        <div class="sidebar-icon" id="sidebar-profile">
+            <i class="fas fa-user"></i>
+            <span class="sidebar-tooltip">الصفحة الشخصية</span>
+        </div>
+        <div class="sidebar-icon" id="sidebar-logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="sidebar-tooltip">تسجيل الخروج</span>
+        </div>
+    </div>
+    
+    <!-- Notifications Panel -->
+    <div class="notifications-panel" id="notifications-panel">
+        <div class="notifications-header">
+            <h3 id="notifications-title">الإشعارات</h3>
+            <span id="notifications-close" style="cursor: pointer;">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div class="notifications-body" id="notifications-body">
+            <div class="notification-item" data-id="1">
+                <div class="notification-title">اجتماع جديد</div>
+                <div class="notification-message">تم تحديد اجتماع مع إدارة الموارد البشرية يوم الخميس الساعة 10 صباحاً</div>
+                <div class="notification-time">منذ ساعتين</div>
+            </div>
+            <div class="notification-item" data-id="2">
+                <div class="notification-title">تذكير بمهمة</div>
+                <div class="notification-message">الموعد النهائي لتقديم تقرير الأداء غداً</div>
+                <div class="notification-time">منذ 5 ساعات</div>
+            </div>
+            <div class="notification-item" data-id="3">
+                <div class="notification-title">رسالة جديدة</div>
+                <div class="notification-message">لديك رسالة جديدة من إدارة تقنية المعلومات</div>
+                <div class="notification-time">منذ يوم</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Login Section -->
+        <div id="login-section">
+            <div class="login-container">
+                <div class="login-header">
+                    <h1 id="login-title">تسجيل الدخول</h1>
+                    <p id="login-subtitle">مرحباً بك في تطبيق إيجاس</p>
+                </div>
+                
+                <div class="login-form">
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label class="form-label" id="username-label">اسم المستخدم</label>
+                            <input type="text" class="form-input" id="username" placeholder="أدخل اسم المستخدم">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" id="password-label">كلمة المرور</label>
+                            <input type="password" class="form-input" id="password" placeholder="أدخل كلمة المرور">
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="login-btn">تسجيل الدخول</button>
+                        
+                        <div class="login-options">
+                            <a href="#" id="forgot-password-link">نسيت كلمة المرور؟</a>
+                            <a href="#" id="register-link">إنشاء حساب جديد</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Department Selection -->
+        <div id="department-selection" class="card hidden">
+            <button class="btn btn-back" id="back-to-login">
+                <i class="fas fa-arrow-right"></i> <span id="back-text">رجوع</span>
+            </button>
+            <div class="card-header">
+                <h2 class="card-title" id="department-title">اختر الإدارة التابعة لك</h2>
+            </div>
+            <div class="grid">
+                <div class="card department-card" data-dept="1">
+                    <h3 id="dept1-title">نظم المعلومات والاتصالات</h3>
+                    <p id="dept1-desc">الإدارة المسؤولة عن الأنظمة التقنية والشبكات</p>
+                </div>
+                <div class="card department-card" data-dept="2">
+                    <h3 id="dept2-title">حماية البيئة</h3>
+                    <p id="dept2-desc">الإدارة المسؤولة عن حماية البيئة</p>
+                </div>
+                <div class="card department-card" data-dept="3">
+                    <h3 id="dept3-title">أنشطة المسؤولية المجتمعية</h3>
+                    <p id="dept3-desc">الإدارة المسؤولة عن الأنشطة المجتمعية</p>
+                </div>
+                <div class="card department-card" data-dept="4">
+                    <h3 id="dept4-title">المكتب الفني والمشاريع الخاصة</h3>
+                    <p id="dept4-desc">الإدارة المسؤولة عن المشاريع الخاصة</p>
+                </div>
+                <div class="card department-card" data-dept="5">
+                    <h3 id="dept5-title">المراجعة والمتابعة</h3>
+                    <p id="dept5-desc">الإدارة المسؤولة عن المراجعة والمتابعة</p>
+                </div>
+                <div class="card department-card" data-dept="6">
+                    <h3 id="dept6-title">العلاقات العامة</h3>
+                    <p id="dept6-desc">الإدارة المسؤولة عن العلاقات العامة</p>
+                </div>
+                <div class="card department-card" data-dept="7">
+                    <h3 id="dept7-title">العلاقات الدولية</h3>
+                    <p id="dept7-desc">الإدارة المسؤولة عن العلاقات الدولية</p>
+                </div>
+                <div class="card department-card" data-dept="8">
+                    <h3 id="dept8-title">العلاقات الحكومية</h3>
+                    <p id="dept8-desc">الإدارة المسؤولة عن العلاقات الحكومية</p>
+                </div>
+                <div class="card department-card" data-dept="9">
+                    <h3 id="dept9-title">العقود</h3>
+                    <p id="dept9-desc">الإدارة المسؤولة عن العقود</p>
+                </div>
+                <div class="card department-card" data-dept="10">
+                    <h3 id="dept10-title">الشؤون الطبية والعلاجية</h3>
+                    <p id="dept10-desc">الإدارة المسؤولة عن الشؤون الطبية</p>
+                </div>
+                <div class="card department-card" data-dept="11">
+                    <h3 id="dept11-title">السلامة والصحة المهنية</h3>
+                    <p id="dept11-desc">الإدارة المسؤولة عن السلامة المهنية</p>
+                </div>
+                <div class="card department-card restricted-department" data-dept="12">
+                    <span class="restricted-badge">مقيدة</span>
+                    <h3 id="dept12-title">الأمن</h3>
+                    <p id="dept12-desc">الإدارة المسؤولة عن الأمن</p>
+                </div>
+                <div class="card department-card restricted-department" data-dept="13">
+                    <span class="restricted-badge">مقيدة</span>
+                    <h3 id="dept13-title">الأمانة العامة لمجلس الإدارة</h3>
+                    <p id="dept13-desc">الإدارة المسؤولة عن مجلس الإدارة</p>
+                </div>
+                <div class="card department-card" data-dept="14">
+                    <h3 id="dept14-title">الإعلام</h3>
+                    <p id="dept14-desc">الإدارة المسؤولة عن الإعلام</p>
+                </div>
+                <div class="card department-card" data-dept="15">
+                    <h3 id="dept15-title">الاستراتيجيات ودعم اتخاذ القرار</h3>
+                    <p id="dept15-desc">الإدارة المسؤولة عن الاستراتيجيات</p>
+                </div>
+                <div class="card department-card" data-dept="16">
+                    <h3 id="dept16-title">تحول الطاقة والاستدامة</h3>
+                    <p id="dept16-desc">الإدارة المسؤولة عن تحول الطاقة</p>
+                </div>
+                <div class="card department-card" data-dept="17">
+                    <h3 id="dept17-title">العمليات والشبكات</h3>
+                    <p id="dept17-desc">الإدارة المسؤولة عن العمليات</p>
+                </div>
+                <div class="card department-card" data-dept="18">
+                    <h3 id="dept18-title">الشؤون المالية</h3>
+                    <p id="dept18-desc">الإدارة المسؤولة عن الشؤون المالية</p>
+                </div>
+                <div class="card department-card" data-dept="19">
+                    <h3 id="dept19-title">الشؤون القانونية</h3>
+                    <p id="dept19-desc">الإدارة المسؤولة عن الشؤون القانونية</p>
+                </div>
+                <div class="card department-card" data-dept="20">
+                    <h3 id="dept20-title">الشؤون الإدارية</h3>
+                    <p id="dept20-desc">الإدارة المسؤولة عن الشؤون الإدارية</p>
+                </div>
+                <div class="card department-card" data-dept="21">
+                    <h3 id="dept21-title">الرقابة على شركات الأجنبي</h3>
+                    <p id="dept21-desc">الإدارة المسؤولة عن الرقابة</p>
+                </div>
+                <div class="card department-card" data-dept="22">
+                    <h3 id="dept22-title">التخطيط ومشاريع الغاز</h3>
+                    <p id="dept22-desc">الإدارة المسؤولة عن تخطيط مشاريع الغاز</p>
+                </div>
+                <div class="card department-card" data-dept="23">
+                    <h3 id="dept23-title">الإدارة الداخلية في شؤون الاقتصاد</h3>
+                    <p id="dept23-desc">الإدارة المسؤولة عن الشؤون الاقتصادية</p>
+                </div>
+                <div class="card department-card" data-dept="24">
+                    <h3 id="dept24-title">التجارة الخارجية</h3>
+                    <p id="dept24-desc">الإدارة المسؤولة عن التجارة الخارجية</p>
+                </div>
+                <div class="card department-card" data-dept="25">
+                    <h3 id="dept25-title">التبعية لرئيس مجلس الإدارة</h3>
+                    <p id="dept25-desc">الإدارة التابعة لرئيس مجلس الإدارة</p>
+                </div>
+                <div class="card department-card" data-dept="26">
+                    <h3 id="dept26-title">الإنتاج وتنمية الحقول</h3>
+                    <p id="dept26-desc">الإدارة المسؤولة عن الإنتاج وتنمية الحقول</p>
+                </div>
+                <div class="card department-card" data-dept="27">
+                    <h3 id="dept27-title">الاتفاقيات والاستكشاف</h3>
+                    <p id="dept27-desc">الإدارة المسؤولة عن الاتفاقيات والاستكشاف</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Trainee Dashboard -->
+        <div id="trainee-dashboard" class="hidden">
+            <button class="btn btn-back" id="back-to-department">
+                <i class="fas fa-arrow-right"></i> <span id="back-dept-text">رجوع</span>
+            </button>
+            <div class="dashboard-section">
+                <h2 class="section-title">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span id="trainee-dashboard-title">لوحة تحكم المتدرب</span>
+                </h2>
+                
+                <!-- Meeting Reminders -->
+                <div id="meeting-reminders" class="meeting-reminder hidden">
+                    <div class="meeting-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="meeting-details">
+                        <h4 id="meeting-reminder-title">تذكير باجتماع</h4>
+                        <p id="meeting-text">اجتماع مع إدارة الموارد البشرية غداً الساعة 10 صباحاً</p>
+                    </div>
+                </div>
+                
+                <div class="grid">
+                    <!-- Files Section -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" id="files-title">الملفات</h3>
+                            <span class="badge">4 ملفات</span>
+                        </div>
+                        <div id="trainee-files">
+                            <div class="file-item">
+                                <div class="file-icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="file-details">
+                                    <div class="file-name" id="file1-name">دليل المتدرب الجديد</div>
+                                    <div class="file-meta">PDF • 2.4 MB • تم الإضافة: 15/05/2023</div>
+                                </div>
+                            </div>
+                            <div class="file-item">
+                                <div class="file-icon">
+                                    <i class="fas fa-file-word"></i>
+                                </div>
+                                <div class="file-details">
+                                    <div class="file-name" id="file2-name">سياسات الشركة</div>
+                                    <div class="file-meta">DOCX • 1.1 MB • تم الإضافة: 10/05/2023</div>
+                                </div>
+                            </div>
+                            <div class="file-item">
+                                <div class="file-icon">
+                                    <i class="fas fa-file-excel"></i>
+                                </div>
+                                <div class="file-details">
+                                    <div class="file-name" id="file3-name">جدول التدريبات</div>
+                                    <div class="file-meta">XLSX • 0.8 MB • تم الإضافة: 05/05/2023</div>
+                                </div>
+                            </div>
+                            <div class="file-item">
+                                <div class="file-icon">
+                                    <i class="fas fa-file-powerpoint"></i>
+                                </div>
+                                <div class="file-details">
+                                    <div class="file-name" id="file4-name">مقدمة عن الشركة</div>
+                                    <div class="file-meta">PPTX • 5.2 MB • تم الإضافة: 01/05/2023</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Videos Section -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" id="videos-title">فيديوهات يوتيوب</h3>
+                            <span class="badge">3 فيديوهات</span>
+                        </div>
+                        <div id="trainee-videos">
+                            <div class="video-item">
+                                <div class="video-icon">
+                                    <i class="fab fa-youtube"></i>
+                                </div>
+                                <div class="video-details">
+                                    <div class="video-title" id="video1-title">مقدمة عن إيجاس</div>
+                                    <div class="video-meta">15:30 • 1,234 مشاهدة</div>
+                                </div>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-icon">
+                                    <i class="fab fa-youtube"></i>
+                                </div>
+                                <div class="video-details">
+                                    <div class="video-title" id="video2-title">دليل المتدرب الجديد</div>
+                                    <div class="video-meta">22:45 • 856 مشاهدة</div>
+                                </div>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-icon">
+                                    <i class="fab fa-youtube"></i>
+                                </div>
+                                <div class="video-details">
+                                    <div class="video-title" id="video3-title">سياسات وإجراءات الشركة</div>
+                                    <div class="video-meta">18:20 • 642 مشاهدة</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid">
+                    <!-- Tasks Section -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" id="tasks-title">المهام</h3>
+                            <span class="badge">5 مهام</span>
+                        </div>
+                        <div id="trainee-tasks">
+                            <div class="task-item">
+                                <div class="task-icon">
+                                    <i class="fas fa-tasks"></i>
+                                </div>
+                                <div class="task-details">
+                                    <div class="task-title" id="task1-title">إكمال قراءة دليل المتدرب</div>
+                                    <div class="task-meta">الموعد النهائي: 20/05/2023</div>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <div class="task-icon">
+                                    <i class="fas fa-tasks"></i>
+                                </div>
+                                <div class="task-details">
+                                    <div class="task-title" id="task2-title">حضور اجتماع التعريف</div>
+                                    <div class="task-meta">الموعد النهائي: 18/05/2023</div>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <div class="task-icon">
+                                    <i class="fas fa-tasks"></i>
+                                </div>
+                                <div class="task-details">
+                                    <div class="task-title" id="task3-title">تسجيل بياناتك في النظام</div>
+                                    <div class="task-meta">الموعد النهائي: 25/05/2023</div>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <div class="task-icon">
+                                    <i class="fas fa-tasks"></i>
+                                </div>
+                                <div class="task-details">
+                                    <div class="task-title" id="task4-title">اجتياز اختبار السياسات</div>
+                                    <div class="task-meta">الموعد النهائي: 30/05/2023</div>
+                                </div>
+                            </div>
+                            <div class="task-item">
+                                <div class="task-icon">
+                                    <i class="fas fa-tasks"></i>
+                                </div>
+                                <div class="task-details">
+                                    <div class="task-title" id="task5-title">تقديم تقرير الأسبوع الأول</div>
+                                    <div class="task-meta">الموعد النهائي: 05/06/2023</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Certificates Section -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" id="certificates-title">الشهادات</h3>
+                            <span class="badge">2 شهادة</span>
+                        </div>
+                        <div id="trainee-certificates">
+                            <div class="certificate-item">
+                                <div class="certificate-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <div class="certificate-details">
+                                    <div class="certificate-name" id="cert1-name">شهادة إتمام التدريب الأساسي</div>
+                                    <div class="certificate-meta">تاريخ الإصدار: 01/06/2023</div>
+                                </div>
+                            </div>
+                            <div class="certificate-item">
+                                <div class="certificate-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <div class="certificate-details">
+                                    <div class="certificate-name" id="cert2-name">شهادة سياسات الشركة</div>
+                                    <div class="certificate-meta">تاريخ الإصدار: 15/06/2023</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Employee Dashboard -->
+        <div id="employee-dashboard" class="hidden">
+            <button class="btn btn-back" id="back-to-department-emp">
+                <i class="fas fa-arrow-right"></i> <span id="back-dept-text-emp">رجوع</span>
+            </button>
+            <div class="dashboard-section">
+                <h2 class="section-title">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span id="employee-dashboard-title">لوحة تحكم الموظف</span>
+                </h2>
+                
+                <!-- Meeting Reminders -->
+                <div id="employee-meeting-reminders" class="meeting-reminder hidden">
+                    <div class="meeting-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="meeting-details">
+                        <h4 id="employee-meeting-reminder-title">تذكير باجتماع</h4>
+                        <p id="employee-meeting-text">اجتماع مع إدارة الموارد البشرية غداً الساعة 10 صباحاً</p>
+                    </div>
+                </div>
+                
+                <div class="grid">
+                    <!-- File Upload Section -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" id="upload-title">رفع الملفات</h3>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" id="choose-file-label">اختر ملف</label>
+                            <input type="file" class="form-input" id="file-upload">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" id="file-desc-label">وصف الملف</label>
+                            <input type="text" class="form-input" id="file-description" placeholder="أدخل وصفاً للملف">
+                        </div>
+                        <button class="btn btn-primary" id="upload-file-btn">رفع الملف</button>
+                        
+                        <div style="margin-top: 20px;">
+                            <h4 id="uploaded-files-title">ملفاتك المرفوعة</h4>
+                            <div id="employee-files">
+                                <div class="file-item">
+                                    <div class="file-icon">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </div>
+                                    <div class="file-details">
+                                        <div class="file-name">تقرير الأداء الشهري</div>
+                                        <div class="file-meta">PDF • 1.8 MB • تم الإضافة: 15/05/2023</div>
+                                    </div>
+                                </div>
+                                <div class="file-item">
+                                    <div class="file-icon">
+                                        <i class="fas fa-file-excel"></i>
+                                    </div>
+                                    <div class="file-details">
+                                        <div class="file-name">جدول المهام الأسبوعي</div>
+                                        <div class="file-meta">XLSX • 0.7 MB • تم الإضافة: 10/05/2023</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Create Post Section -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title" id="create-post-title">إنشاء منشور</h3>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" id="post-title-label">عنوان المنشور</label>
+                            <input type="text" class="form-input" id="post-title" placeholder="أدخل عنوان المنشور">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" id="post-content-label">محتوى المنشور</label>
+                            <textarea class="form-input" id="post-content" rows="4" placeholder="أدخل محتوى المنشور"></textarea>
+                        </div>
+                        <button class="btn btn-primary" id="create-post-btn">نشر المنشور</button>
+                    </div>
+                </div>
+                
+                <!-- Communication Section -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title" id="comm-title">التواصل بين الإدارات</h3>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" id="select-dept-label">اختر الإدارة</label>
+                        <select class="form-input" id="department-select">
+                            <option value="">-- اختر الإدارة --</option>
+                            <option value="1">نظم المعلومات والاتصالات</option>
+                            <option value="2">حماية البيئة</option>
+                            <option value="3">أنشطة المسؤولية المجتمعية</option>
+                            <option value="4">المكتب الفني والمشاريع الخاصة</option>
+                            <option value="5">المراجعة والمتابعة</option>
+                            <option value="6">العلاقات العامة</option>
+                            <option value="7">العلاقات الدولية</option>
+                            <option value="8">العلاقات الحكومية</option>
+                            <option value="9">العقود</option>
+                            <option value="10">الشؤون الطبية والعلاجية</option>
+                            <option value="11">السلامة والصحة المهنية</option>
+                            <option value="12">الأمن</option>
+                            <option value="13">الأمانة العامة لمجلس الإدارة</option>
+                            <option value="14">الإعلام</option>
+                            <option value="15">الاستراتيجيات ودعم اتخاذ القرار</option>
+                            <option value="16">تحول الطاقة والاستدامة</option>
+                            <option value="17">العمليات والشبكات</option>
+                            <option value="18">الشؤون المالية</option>
+                            <option value="19">الشؤون القانونية</option>
+                            <option value="20">الشؤون الإدارية</option>
+                            <option value="21">الرقابة على شركات الأجنبي</option>
+                            <option value="22">التخطيط ومشاريع الغاز</option>
+                            <option value="23">الإدارة الداخلية في شؤون الاقتصاد</option>
+                            <option value="24">التجارة الخارجية</option>
+                            <option value="25">التبعية لرئيس مجلس الإدارة</option>
+                            <option value="26">الإنتاج وتنمية الحقول</option>
+                            <option value="27">الاتفاقيات والاستكشاف</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" id="message-label">محتوى الرسالة</label>
+                        <textarea class="form-input" id="message-content" rows="3" placeholder="أدخل محتوى الرسالة"></textarea>
+                    </div>
+                    
+                    <button class="btn btn-primary" id="send-message-btn">إرسال الرسالة</button>
+                </div>
+                
+                <!-- Home Feed Section -->
+                <div class="card home-feed">
+                    <div class="feed-header">
+                        <h3 class="feed-title">المنشورات والرسائل</h3>
+                        <div class="feed-filter">
+                            <select id="feed-department-filter">
+                                <option value="all">جميع الإدارات</option>
+                                <option value="1">نظم المعلومات والاتصالات</option>
+                                <option value="2">حماية البيئة</option>
+                                <option value="3">أنشطة المسؤولية المجتمعية</option>
+                                <option value="4">المكتب الفني والمشاريع الخاصة</option>
+                                <option value="5">المراجعة والمتابعة</option>
+                                <option value="6">العلاقات العامة</option>
+                                <option value="7">العلاقات الدولية</option>
+                                <option value="8">العلاقات الحكومية</option>
+                                <option value="9">العقود</option>
+                                <option value="10">الشؤون الطبية والعلاجية</option>
+                                <option value="11">السلامة والصحة المهنية</option>
+                                <option value="12">الأمن</option>
+                                <option value="13">الأمانة العامة لمجلس الإدارة</option>
+                                <option value="14">الإعلام</option>
+                                <option value="15">الاستراتيجيات ودعم اتخاذ القرار</option>
+                                <option value="16">تحول الطاقة والاستدامة</option>
+                                <option value="17">العمليات والشبكات</option>
+                                <option value="18">الشؤون المالية</option>
+                                <option value="19">الشؤون القانونية</option>
+                                <option value="20">الشؤون الإدارية</option>
+                                <option value="21">الرقابة على شركات الأجنبي</option>
+                                <option value="22">التخطيط ومشاريع الغاز</option>
+                                <option value="23">الإدارة الداخلية في شؤون الاقتصاد</option>
+                                <option value="24">التجارة الخارجية</option>
+                                <option value="25">التبعية لرئيس مجلس الإدارة</option>
+                                <option value="26">الإنتاج وتنمية الحقول</option>
+                                <option value="27">الاتفاقيات والاستكشاف</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="posts-container">
+                        <div class="post-item" data-dept="1">
+                            <div class="post-header">
+                                <div>
+                                    <div class="post-author">أحمد محمد</div>
+                                    <div class="post-department">نظم المعلومات والاتصالات</div>
+                                </div>
+                                <div>15/05/2023</div>
+                            </div>
+                            <div class="post-content">
+                                يرجى جميع الموظفين تقديم تقارير الأداء الشهرية نهاية هذا الأسبوع.
+                            </div>
+                            <div class="post-actions">
+                                <span class="post-action" data-action="like"><i class="far fa-heart"></i> 12 إعجاب</span>
+                                <span class="post-action" data-action="comment"><i class="far fa-comment"></i> 3 تعليقات</span>
+                                <span class="post-action" data-action="share"><i class="far fa-share"></i> مشاركة</span>
+                            </div>
+                            <div class="comments-section" style="display: none;">
+                                <div class="comment-item">
+                                    <div class="comment-author">سامي عبدالله</div>
+                                    <div class="comment-content">تم استلام التقرير وسأقدمه في الموعد المحدد.</div>
+                                    <div class="comment-actions">
+                                        <span class="comment-action" data-action="like">إعجاب</span>
+                                        <span class="comment-action" data-action="reply">رد</span>
+                                        <button class="private-message-btn">رسالة خاصة</button>
+                                    </div>
+                                    <div class="replies-section" style="display: none;">
+                                        <div class="reply-item">
+                                            <div class="comment-author">أحمد محمد</div>
+                                            <div class="comment-content">شكراً لالتزامك بالمواعيد.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="comment-item">
+                                    <div class="comment-author">فاطمة أحمد</div>
+                                    <div class="comment-content">هل هناك نموذج محدد للتقرير؟</div>
+                                    <div class="comment-actions">
+                                        <span class="comment-action" data-action="like">إعجاب</span>
+                                        <span class="comment-action" data-action="reply">رد</span>
+                                        <button class="private-message-btn">رسالة خاصة</button>
+                                    </div>
+                                </div>
+                                <div class="comment-form">
+                                    <input type="text" class="comment-input" placeholder="أضف تعليقاً...">
+                                    <div class="comment-actions-form">
+                                        <button class="comment-submit">نشر</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-item" data-dept="18">
+                            <div class="post-header">
+                                <div>
+                                    <div class="post-author">خالد سالم</div>
+                                    <div class="post-department">الشؤون المالية</div>
+                                </div>
+                                <div>12/05/2023</div>
+                            </div>
+                            <div class="post-content">
+                                إعلان عن ورشة عمل جديدة حول إدارة الميزانيات للإدارات المختلفة.
+                            </div>
+                            <div class="post-actions">
+                                <span class="post-action" data-action="like"><i class="far fa-heart"></i> 24 إعجاب</span>
+                                <span class="post-action" data-action="comment"><i class="far fa-comment"></i> 7 تعليقات</span>
+                                <span class="post-action" data-action="share"><i class="far fa-share"></i> مشاركة</span>
+                            </div>
+                            <div class="comments-section" style="display: none;">
+                                <div class="comment-item">
+                                    <div class="comment-author">مريم يوسف</div>
+                                    <div class="comment-content">متى ستكون الورشة؟ وهل ستكون متاحة لجميع الإدارات؟</div>
+                                    <div class="comment-actions">
+                                        <span class="comment-action" data-action="like">إعجاب</span>
+                                        <span class="comment-action" data-action="reply">رد</span>
+                                        <button class="private-message-btn">رسالة خاصة</button>
+                                    </div>
+                                </div>
+                                <div class="comment-form">
+                                    <input type="text" class="comment-input" placeholder="أضف تعليقاً...">
+                                    <div class="comment-actions-form">
+                                        <button class="comment-submit">نشر</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-item" data-dept="2">
+                            <div class="post-header">
+                                <div>
+                                    <div class="post-author">نورا أحمد</div>
+                                    <div class="post-department">حماية البيئة</div>
+                                </div>
+                                <div>10/05/2023</div>
+                            </div>
+                            <div class="post-content">
+                                تذكير بضرورة الالتزام بإجراءات حماية البيئة في جميع الأنشطة.
+                            </div>
+                            <div class="post-actions">
+                                <span class="post-action" data-action="like"><i class="far fa-heart"></i> 18 إعجاب</span>
+                                <span class="post-action" data-action="comment"><i class="far fa-comment"></i> 5 تعليقات</span>
+                                <span class="post-action" data-action="share"><i class="far fa-share"></i> مشاركة</span>
+                            </div>
+                            <div class="comments-section" style="display: none;">
+                                <div class="comment-item">
+                                    <div class="comment-author">علي محمد</div>
+                                    <div class="comment-content">هل هناك أي تحديثات جديدة في سياسات حماية البيئة؟</div>
+                                    <div class="comment-actions">
+                                        <span class="comment-action" data-action="like">إعجاب</span>
+                                        <span class="comment-action" data-action="reply">رد</span>
+                                        <button class="private-message-btn">رسالة خاصة</button>
+                                    </div>
+                                </div>
+                                <div class="comment-form">
+                                    <input type="text" class="comment-input" placeholder="أضف تعليقاً...">
+                                    <div class="comment-actions-form">
+                                        <button class="comment-submit">نشر</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- IT Courses Section -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title" id="courses-title">كورسات تقنية المعلومات</h3>
+                    </div>
+                    
+                    <div class="grid">
+                        <div class="course-item">
+                            <div class="course-icon">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <div class="course-details">
+                                <div class="course-title" id="course1-title">أساسيات الشبكات</div>
+                                <div class="course-description" id="course1-desc">تعلم المفاهيم الأساسية للشبكات وكيفية عملها</div>
+                                <div class="course-actions">
+                                    <button class="btn btn-success" id="register-course1-btn">التسجيل في الكورس</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="course-item">
+                            <div class="course-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="course-details">
+                                <div class="course-title" id="course2-title">أمن المعلومات</div>
+                                <div class="course-description" id="course2-desc">حماية البيانات والأنظمة من التهديدات الأمنية</div>
+                                <div class="course-actions">
+                                    <button class="btn btn-success" id="register-course2-btn">التسجيل في الكورس</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="course-item">
+                            <div class="course-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="course-details">
+                                <div class="course-title" id="course3-title">إدارة الخوادم</div>
+                                <div class="course-description" id="course3-desc">إدارة وصيانة الخوادم وضمان عملها بكفاءة</div>
+                                <div class="course-actions">
+                                    <button class="btn btn-success" id="register-course3-btn">التسجيل في الكورس</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="course-item">
+                            <div class="course-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="course-details">
+                                <div class="course-title" id="course4-title">تطوير الويب</div>
+                                <div class="course-description" id="course4-desc">مبادئ تطوير المواقع والتطبيقات الإلكترونية</div>
+                                <div class="course-actions">
+                                    <button class="btn btn-success" id="register-course4-btn">التسجيل في الكورس</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Settings Section -->
+        <div id="settings-section" class="hidden">
+            <div class="settings-panel">
+                <h2 class="section-title">
+                    <i class="fas fa-cog"></i>
+                    <span id="settings-title">الإعدادات</span>
+                </h2>
+                
+                <!-- Language Settings -->
+                <div class="settings-group">
+                    <h3 class="settings-title" id="lang-title">اللغة</h3>
+                    <div class="settings-option">
+                        <span id="arabic-text">اللغة العربية</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="arabic-lang" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-option">
+                        <span id="english-text">اللغة الإنجليزية</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="english-lang">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Theme Settings -->
+                <div class="settings-group">
+                    <h3 class="settings-title" id="theme-title">المظهر</h3>
+                    <div class="settings-option">
+                        <span id="light-mode-text">الوضع النهاري</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="light-mode" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-option">
+                        <span id="dark-mode-text">الوضع الليلي</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="dark-mode">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Notification Settings -->
+                <div class="settings-group">
+                    <h3 class="settings-title" id="notification-settings-title">الإشعارات</h3>
+                    <div class="settings-option">
+                        <span id="email-notif-text">إشعارات البريد الإلكتروني</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="email-notif" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-option">
+                        <span id="push-notif-text">الإشعارات الفورية</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="push-notif" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Profile Section (for employees only) -->
+                <div id="employee-profile" class="hidden">
+                    <div class="settings-group">
+                        <h3 class="settings-title" id="profile-title">الملف الشخصي</h3>
+                        
+                        <div class="profile-section">
+                            <div class="profile-avatar" id="profile-avatar">م</div>
+                            <div class="profile-name" id="profile-name">محمد أحمد</div>
+                            <div class="profile-role" id="profile-role">موظف في الشؤون المالية</div>
+                            
+                            <div class="profile-stats">
+                                <div class="profile-stat">
+                                    <div class="profile-stat-value">12</div>
+                                    <div class="profile-stat-label" id="posts-stat">منشور</div>
+                                </div>
+                                <div class="profile-stat">
+                                    <div class="profile-stat-value">5</div>
+                                    <div class="profile-stat-label" id="files-stat">ملف</div>
+                                </div>
+                                <div class="profile-stat">
+                                    <div class="profile-stat-value">3</div>
+                                    <div class="profile-stat-label" id="deleted-stat">محذوف</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-container">
+                            <div class="tab-buttons">
+                                <button class="tab-button active" data-tab="posts" id="posts-tab-btn">المنشورات</button>
+                                <button class="tab-button" data-tab="deleted" id="deleted-tab-btn">المحذوفات</button>
+                            </div>
+                            
+                            <div class="tab-content active" id="posts-tab">
+                                <div class="post-item">
+                                    <div class="post-header">
+                                        <div>
+                                            <div class="post-author">تقرير الميزانية الشهرية</div>
+                                            <div class="post-department">الشؤون المالية</div>
+                                        </div>
+                                        <div>15/05/2023</div>
+                                    </div>
+                                    <div class="post-content">
+                                        تم إعداد تقرير الميزانية الشهرية للمراجعة.
+                                    </div>
+                                </div>
+                                
+                                <div class="post-item">
+                                    <div class="post-header">
+                                        <div>
+                                            <div class="post-author">تحديثات النظام المالي</div>
+                                            <div class="post-department">الشؤون المالية</div>
+                                        </div>
+                                        <div>10/05/2023</div>
+                                    </div>
+                                    <div class="post-content">
+                                        سيتم تحديث النظام المالي يوم السبت المقبل.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-content" id="deleted-tab">
+                                <div class="post-item">
+                                    <div class="post-header">
+                                        <div>
+                                            <div class="post-author">منشور قديم</div>
+                                            <div class="post-department">الشؤون المالية</div>
+                                        </div>
+                                        <div>05/05/2023</div>
+                                    </div>
+                                    <div class="post-content">
+                                        هذا منشور تم حذفه سابقاً.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Profile Section -->
+        <div id="profile-section" class="hidden">
+            <button class="btn btn-back" id="back-to-dashboard">
+                <i class="fas fa-arrow-right"></i> <span id="back-dashboard-text">رجوع</span>
+            </button>
+            <div class="settings-panel">
+                <h2 class="section-title">
+                    <i class="fas fa-user"></i>
+                    <span id="profile-page-title">الصفحة الشخصية</span>
+                </h2>
+                
+                <div class="profile-section">
+                    <div class="profile-avatar" id="profile-page-avatar">م</div>
+                    <div class="profile-name" id="profile-page-name">محمد أحمد</div>
+                    <div class="profile-role" id="profile-page-role">موظف في الشؤون المالية</div>
+                    
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <div class="profile-stat-value">12</div>
+                            <div class="profile-stat-label" id="profile-posts-stat">منشور</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-value">5</div>
+                            <div class="profile-stat-label" id="profile-files-stat">ملف</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-value">3</div>
+                            <div class="profile-stat-label" id="profile-deleted-stat">محذوف</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" data-tab="profile-posts" id="profile-posts-tab-btn">المنشورات</button>
+                        <button class="tab-button" data-tab="profile-deleted" id="profile-deleted-tab-btn">المحذوفات</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="profile-posts-tab">
+                        <div class="post-item">
+                            <div class="post-header">
+                                <div>
+                                    <div class="post-author">تقرير الميزانية الشهرية</div>
+                                    <div class="post-department">الشؤون المالية</div>
+                                </div>
+                                <div>15/05/2023</div>
+                            </div>
+                            <div class="post-content">
+                                تم إعداد تقرير الميزانية الشهرية للمراجعة.
+                            </div>
+                        </div>
+                        
+                        <div class="post-item">
+                            <div class="post-header">
+                                <div>
+                                    <div class="post-author">تحديثات النظام المالي</div>
+                                    <div class="post-department">الشؤون المالية</div>
+                                </div>
+                                <div>10/05/2023</div>
+                            </div>
+                            <div class="post-content">
+                                سيتم تحديث النظام المالي يوم السبت المقبل.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="profile-deleted-tab">
+                        <div class="post-item">
+                            <div class="post-header">
+                                <div>
+                                    <div class="post-author">منشور قديم</div>
+                                    <div class="post-department">الشؤون المالية</div>
+                                </div>
+                                <div>05/05/2023</div>
+                            </div>
+                            <div class="post-content">
+                                هذا منشور تم حذفه سابقاً.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- AI Assistant -->
+    <div class="ai-assistant" id="ai-assistant-btn">
+        <i class="fas fa-robot"></i>
+    </div>
+    <div class="ai-chat" id="ai-chat">
+        <div class="ai-chat-header">
+            <h3 id="ai-title">مساعد إيجاس الذكي</h3>
+            <span class="ai-chat-close" id="ai-chat-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div class="ai-chat-body" id="ai-chat-body">
+            <div class="ai-message ai">
+                <span id="ai-greeting">مرحباً! أنا مساعدك الذكي في تطبيق إيجاس. كيف يمكنني مساعدتك اليوم؟</span>
+            </div>
+        </div>
+        <div class="ai-chat-footer">
+            <div class="form-group">
+                <input type="text" class="form-input" id="ai-input" placeholder="اكتب سؤالك هنا...">
+            </div>
+            <button class="btn btn-primary" id="ai-send-btn">إرسال</button>
+        </div>
+    </div>
+    
+    <!-- Modals -->
+    <div class="modal" id="register-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="modal-close" id="register-modal-close">&times;</span>
+            <h3 class="modal-title" id="register-modal-title">إنشاء حساب جديد</h3>
+            <form id="register-form">
+                <div class="form-group">
+                    <label class="form-label" id="reg-username-label">اسم المستخدم</label>
+                    <input type="text" class="form-input" id="reg-username" placeholder="أدخل اسم المستخدم">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="reg-password-label">كلمة المرور</label>
+                    <input type="password" class="form-input" id="reg-password" placeholder="أدخل كلمة المرور">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="reg-confirm-label">تأكيد كلمة المرور</label>
+                    <input type="password" class="form-input" id="reg-confirm-password" placeholder="أعد إدخال كلمة المرور">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="reg-email-label">البريد الإلكتروني</label>
+                    <input type="email" class="form-input" id="reg-email" placeholder="أدخل بريدك الإلكتروني">
+                </div>
+                <button type="submit" class="btn btn-primary" id="register-btn">إنشاء الحساب</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="modal" id="forgot-password-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="modal-close" id="forgot-password-modal-close">&times;</span>
+            <h3 class="modal-title" id="forgot-modal-title">استعادة كلمة المرور</h3>
+            <form id="forgot-password-form">
+                <div class="form-group">
+                    <label class="form-label" id="forgot-username-label">اسم المستخدم</label>
+                    <input type="text" class="form-input" id="forgot-username" placeholder="أدخل اسم المستخدم">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" id="forgot-email-label">البريد الإلكتروني</label>
+                    <input type="email" class="form-input" id="forgot-email" placeholder="أدخل بريدك الإلكتروني">
+                </div>
+                <button type="submit" class="btn btn-primary" id="forgot-btn">إرسال رابط الاستعادة</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <div class="notification-content">
+            <div class="notification-title" id="notification-title">تمت العملية بنجاح</div>
+            <div class="notification-message" id="notification-message">تمت العملية بنجاح</div>
+            <a href="#" class="notification-link" id="notification-link" style="display: none;">عرض التفاصيل</a>
+        </div>
+    </div>
+    
+    <script>
+        // Language translations
+        const translations = {
+            'ar': {
+                'app-title': 'إيجاس',
+                'login-title': 'تسجيل الدخول',
+                'login-subtitle': 'مرحباً بك في تطبيق إيجاس',
+                'username-label': 'اسم المستخدم',
+                'password-label': 'كلمة المرور',
+                'login-btn': 'تسجيل الدخول',
+                'forgot-password-link': 'نسيت كلمة المرور؟',
+                'register-link': 'إنشاء حساب جديد',
+                'department-title': 'اختر الإدارة التابعة لك',
+                'dept1-title': 'نظم المعلومات والاتصالات',
+                'dept1-desc': 'الإدارة المسؤولة عن الأنظمة التقنية والشبكات',
+                'dept2-title': 'حماية البيئة',
+                'dept2-desc': 'الإدارة المسؤولة عن حماية البيئة',
+                'dept3-title': 'أنشطة المسؤولية المجتمعية',
+                'dept3-desc': 'الإدارة المسؤولة عن الأنشطة المجتمعية',
+                'dept4-title': 'المكتب الفني والمشاريع الخاصة',
+                'dept4-desc': 'الإدارة المسؤولة عن المشاريع الخاصة',
+                'dept5-title': 'المراجعة والمتابعة',
+                'dept5-desc': 'الإدارة المسؤولة عن المراجعة والمتابعة',
+                'dept6-title': 'العلاقات العامة',
+                'dept6-desc': 'الإدارة المسؤولة عن العلاقات العامة',
+                'dept7-title': 'العلاقات الدولية',
+                'dept7-desc': 'الإدارة المسؤولة عن العلاقات الدولية',
+                'dept8-title': 'العلاقات الحكومية',
+                'dept8-desc': 'الإدارة المسؤولة عن العلاقات الحكومية',
+                'dept9-title': 'العقود',
+                'dept9-desc': 'الإدارة المسؤولة عن العقود',
+                'dept10-title': 'الشؤون الطبية والعلاجية',
+                'dept10-desc': 'الإدارة المسؤولة عن الشؤون الطبية',
+                'dept11-title': 'السلامة والصحة المهنية',
+                'dept11-desc': 'الإدارة المسؤولة عن السلامة المهنية',
+                'dept12-title': 'الأمن',
+                'dept12-desc': 'الإدارة المسؤولة عن الأمن',
+                'dept13-title': 'الأمانة العامة لمجلس الإدارة',
+                'dept13-desc': 'الإدارة المسؤولة عن مجلس الإدارة',
+                'dept14-title': 'الإعلام',
+                'dept14-desc': 'الإدارة المسؤولة عن الإعلام',
+                'dept15-title': 'الاستراتيجيات ودعم اتخاذ القرار',
+                'dept15-desc': 'الإدارة المسؤولة عن الاستراتيجيات',
+                'dept16-title': 'تحول الطاقة والاستدامة',
+                'dept16-desc': 'الإدارة المسؤولة عن تحول الطاقة',
+                'dept17-title': 'العمليات والشبكات',
+                'dept17-desc': 'الإدارة المسؤولة عن العمليات',
+                'dept18-title': 'الشؤون المالية',
+                'dept18-desc': 'الإدارة المسؤولة عن الشؤون المالية',
+                'dept19-title': 'الشؤون القانونية',
+                'dept19-desc': 'الإدارة المسؤولة عن الشؤون القانونية',
+                'dept20-title': 'الشؤون الإدارية',
+                'dept20-desc': 'الإدارة المسؤولة عن الشؤون الإدارية',
+                'dept21-title': 'الرقابة على شركات الأجنبي',
+                'dept21-desc': 'الإدارة المسؤولة عن الرقابة',
+                'dept22-title': 'التخطيط ومشاريع الغاز',
+                'dept22-desc': 'الإدارة المسؤولة عن تخطيط مشاريع الغاز',
+                'dept23-title': 'الإدارة الداخلية في شؤون الاقتصاد',
+                'dept23-desc': 'الإدارة المسؤولة عن الشؤون الاقتصادية',
+                'dept24-title': 'التجارة الخارجية',
+                'dept24-desc': 'الإدارة المسؤولة عن التجارة الخارجية',
+                'dept25-title': 'التبعية لرئيس مجلس الإدارة',
+                'dept25-desc': 'الإدارة التابعة لرئيس مجلس الإدارة',
+                'dept26-title': 'الإنتاج وتنمية الحقول',
+                'dept26-desc': 'الإدارة المسؤولة عن الإنتاج وتنمية الحقول',
+                'dept27-title': 'الاتفاقيات والاستكشاف',
+                'dept27-desc': 'الإدارة المسؤولة عن الاتفاقيات والاستكشاف',
+                'back-text': 'رجوع',
+                'back-dept-text': 'رجوع',
+                'trainee-dashboard-title': 'لوحة تحكم المتدرب',
+                'employee-dashboard-title': 'لوحة تحكم الموظف',
+                'meeting-reminder-title': 'تذكير باجتماع',
+                'files-title': 'الملفات',
+                'file1-name': 'دليل المتدرب الجديد',
+                'file2-name': 'سياسات الشركة',
+                'file3-name': 'جدول التدريبات',
+                'file4-name': 'مقدمة عن الشركة',
+                'videos-title': 'فيديوهات يوتيوب',
+                'video1-title': 'مقدمة عن إيجاس',
+                'video2-title': 'دليل المتدرب الجديد',
+                'video3-title': 'سياسات وإجراءات الشركة',
+                'tasks-title': 'المهام',
+                'task1-title': 'إكمال قراءة دليل المتدرب',
+                'task2-title': 'حضور اجتماع التعريف',
+                'task3-title': 'تسجيل بياناتك في النظام',
+                'task4-title': 'اجتياز اختبار السياسات',
+                'task5-title': 'تقديم تقرير الأسبوع الأول',
+                'certificates-title': 'الشهادات',
+                'cert1-name': 'شهادة إتمام التدريب الأساسي',
+                'cert2-name': 'شهادة سياسات الشركة',
+                'upload-title': 'رفع الملفات',
+                'choose-file-label': 'اختر ملف',
+                'file-desc-label': 'وصف الملف',
+                'upload-file-btn': 'رفع الملف',
+                'uploaded-files-title': 'ملفاتك المرفوعة',
+                'create-post-title': 'إنشاء منشور',
+                'post-title-label': 'عنوان المنشور',
+                'post-content-label': 'محتوى المنشور',
+                'create-post-btn': 'نشر المنشور',
+                'comm-title': 'التواصل بين الإدارات',
+                'select-dept-label': 'اختر الإدارة',
+                'message-label': 'محتوى الرسالة',
+                'send-message-btn': 'إرسال الرسالة',
+                'posts-title': 'المنشورات والرسائل',
+                'courses-title': 'كورسات تقنية المعلومات',
+                'course1-title': 'أساسيات الشبكات',
+                'course1-desc': 'تعلم المفاهيم الأساسية للشبكات وكيفية عملها',
+                'course2-title': 'أمن المعلومات',
+                'course2-desc': 'حماية البيانات والأنظمة من التهديدات الأمنية',
+                'course3-title': 'إدارة الخوادم',
+                'course3-desc': 'إدارة وصيانة الخوادم وضمان عملها بكفاءة',
+                'course4-title': 'تطوير الويب',
+                'course4-desc': 'مبادئ تطوير المواقع والتطبيقات الإلكترونية',
+                'register-course1-btn': 'التسجيل في الكورس',
+                'register-course2-btn': 'التسجيل في الكورس',
+                'register-course3-btn': 'التسجيل في الكورس',
+                'register-course4-btn': 'التسجيل في الكورس',
+                'settings-title': 'الإعدادات',
+                'lang-title': 'اللغة',
+                'arabic-text': 'اللغة العربية',
+                'english-text': 'اللغة الإنجليزية',
+                'theme-title': 'المظهر',
+                'light-mode-text': 'الوضع النهاري',
+                'dark-mode-text': 'الوضع الليلي',
+                'notification-settings-title': 'الإشعارات',
+                'email-notif-text': 'إشعارات البريد الإلكتروني',
+                'push-notif-text': 'الإشعارات الفورية',
+                'profile-title': 'الملف الشخصي',
+                'profile-page-title': 'الصفحة الشخصية',
+                'posts-stat': 'منشور',
+                'files-stat': 'ملف',
+                'deleted-stat': 'محذوف',
+                'profile-posts-stat': 'منشور',
+                'profile-files-stat': 'ملف',
+                'profile-deleted-stat': 'محذوف',
+                'posts-tab-btn': 'المنشورات',
+                'deleted-tab-btn': 'المحذوفات',
+                'profile-posts-tab-btn': 'المنشورات',
+                'profile-deleted-tab-btn': 'المحذوفات',
+                'ai-title': 'مساعد إيجاس الذكي',
+                'ai-greeting': 'مرحباً! أنا مساعدك الذكي في تطبيق إيجاس. كيف يمكنني مساعدتك اليوم؟',
+                'ai-send-btn': 'إرسال',
+                'register-modal-title': 'إنشاء حساب جديد',
+                'reg-username-label': 'اسم المستخدم',
+                'reg-password-label': 'كلمة المرور',
+                'reg-confirm-label': 'تأكيد كلمة المرور',
+                'reg-email-label': 'البريد الإلكتروني',
+                'register-btn': 'إنشاء الحساب',
+                'forgot-modal-title': 'استعادة كلمة المرور',
+                'forgot-username-label': 'اسم المستخدم',
+                'forgot-email-label': 'البريد الإلكتروني',
+                'forgot-btn': 'إرسال رابط الاستعادة',
+                'home-link': 'الرئيسية',
+                'dashboard-link': 'لوحة التحكم',
+                'settings-link': 'الإعدادات',
+                'profile-link': 'الصفحة الشخصية',
+                'logout-link': 'تسجيل الخروج',
+                'back-dashboard-text': 'رجوع',
+                'notifications-title': 'الإشعارات',
+                'filter-title': 'تصفية المنشورات حسب الإدارة',
+                'apply-filter': 'تطبيق',
+                'reset-filter': 'إعادة تعيين',
+                'success-notification': 'تمت العملية بنجاح',
+                'error-notification': 'حدث خطأ',
+                'warning-notification': 'تنبيه',
+                'login-error': 'بيانات الدخول غير صحيحة',
+                'empty-fields': 'يرجى ملء جميع الحقول',
+                'password-mismatch': 'كلمتا المرور غير متطابقتين',
+                'account-created': 'تم إنشاء الحساب بنجاح',
+                'password-reset': 'تم إرسال رابط استعادة كلمة المرور',
+                'file-uploaded': 'تم رفع الملف بنجاح',
+                'post-created': 'تم نشر المنشور بنجاح',
+                'message-sent': 'تم إرسال الرسالة بنجاح',
+                'logout-success': 'تم تسجيل الخروج بنجاح',
+                'lang-changed': 'تم تغيير اللغة بنجاح',
+                'theme-changed': 'تم تغيير المظهر بنجاح',
+                'one-lang': 'يرجى اختيار لغة واحدة فقط',
+                'one-theme': 'يرجى اختيار وضع واحد فقط',
+                'select-file': 'يرجى اختيار ملف أولاً',
+                'enter-title': 'يرجى إدخال عنوان المنشور',
+                'enter-content': 'يرجى إدخال محتوى المنشور',
+                'select-dept': 'يرجى اختيار الإدارة أولاً',
+                'enter-message': 'يرجى إدخال محتوى الرسالة',
+                'restricted-access': 'الدخول إلى هذه الإدارة ممنوع للمتدربين',
+                'restricted-department': 'هذه الإدارة متاحة للموظفين فقط',
+                'filter-applied': 'تم تطبيق الفلتر بنجاح',
+                'filter-reset': 'تم إعادة تعيين الفلتر',
+                'comment-added': 'تم إضافة التعليق بنجاح',
+                'reply-added': 'تم إضافة الرد بنجاح',
+                'private-message-sent': 'تم إرسال الرسالة الخاصة بنجاح'
+            },
+            'en': {
+                'app-title': 'EGAS',
+                'login-title': 'Login',
+                'login-subtitle': 'Welcome to EGAS Application',
+                'username-label': 'Username',
+                'password-label': 'Password',
+                'login-btn': 'Login',
+                'forgot-password-link': 'Forgot Password?',
+                'register-link': 'Create New Account',
+                'department-title': 'Select Your Department',
+                'dept1-title': 'Information Systems and Communications',
+                'dept1-desc': 'Department responsible for technical systems and networks',
+                'dept2-title': 'Environmental Protection',
+                'dept2-desc': 'Department responsible for environmental protection',
+                'dept3-title': 'Corporate Social Responsibility Activities',
+                'dept3-desc': 'Department responsible for social activities',
+                'dept4-title': 'Technical Office and Special Projects',
+                'dept4-desc': 'Department responsible for special projects',
+                'dept5-title': 'Review and Follow-up',
+                'dept5-desc': 'Department responsible for review and follow-up',
+                'dept6-title': 'Public Relations',
+                'dept6-desc': 'Department responsible for public relations',
+                'dept7-title': 'International Relations',
+                'dept7-desc': 'Department responsible for international relations',
+                'dept8-title': 'Governmental Relations',
+                'dept8-desc': 'Department responsible for governmental relations',
+                'dept9-title': 'Contracts',
+                'dept9-desc': 'Department responsible for contracts',
+                'dept10-title': 'Medical and Therapeutic Affairs',
+                'dept10-desc': 'Department responsible for medical affairs',
+                'dept11-title': 'Occupational Safety and Health',
+                'dept11-desc': 'Department responsible for occupational safety',
+                'dept12-title': 'Security',
+                'dept12-desc': 'Department responsible for security',
+                'dept13-title': 'General Secretariat of the Board of Directors',
+                'dept13-desc': 'Department responsible for the board of directors',
+                'dept14-title': 'Media',
+                'dept14-desc': 'Department responsible for media',
+                'dept15-title': 'Strategies and Decision Support',
+                'dept15-desc': 'Department responsible for strategies',
+                'dept16-title': 'Energy Transition and Sustainability',
+                'dept16-desc': 'Department responsible for energy transition',
+                'dept17-title': 'Operations and Networks',
+                'dept17-desc': 'Department responsible for operations',
+                'dept18-title': 'Financial Affairs',
+                'dept18-desc': 'Department responsible for financial affairs',
+                'dept19-title': 'Legal Affairs',
+                'dept19-desc': 'Department responsible for legal affairs',
+                'dept20-title': 'Administrative Affairs',
+                'dept20-desc': 'Department responsible for administrative affairs',
+                'dept21-title': 'Control of Foreign Companies',
+                'dept21-desc': 'Department responsible for control',
+                'dept22-title': 'Planning and Gas Projects',
+                'dept22-desc': 'Department responsible for gas project planning',
+                'dept23-title': 'Internal Administration in Economic Affairs',
+                'dept23-desc': 'Department responsible for economic affairs',
+                'dept24-title': 'Foreign Trade',
+                'dept24-desc': 'Department responsible for foreign trade',
+                'dept25-title': 'Subordination to the Chairman of the Board of Directors',
+                'dept25-desc': 'Department subordinate to the chairman',
+                'dept26-title': 'Production and Field Development',
+                'dept26-desc': 'Department responsible for production and field development',
+                'dept27-title': 'Agreements and Exploration',
+                'dept27-desc': 'Department responsible for agreements and exploration',
+                'back-text': 'Back',
+                'back-dept-text': 'Back',
+                'trainee-dashboard-title': 'Trainee Dashboard',
+                'employee-dashboard-title': 'Employee Dashboard',
+                'meeting-reminder-title': 'Meeting Reminder',
+                'files-title': 'Files',
+                'file1-name': 'New Trainee Guide',
+                'file2-name': 'Company Policies',
+                'file3-name': 'Training Schedule',
+                'file4-name': 'Introduction to the Company',
+                'videos-title': 'YouTube Videos',
+                'video1-title': 'Introduction to EGAS',
+                'video2-title': 'New Trainee Guide',
+                'video3-title': 'Company Policies and Procedures',
+                'tasks-title': 'Tasks',
+                'task1-title': 'Complete reading the trainee guide',
+                'task2-title': 'Attend orientation meeting',
+                'task3-title': 'Register your data in the system',
+                'task4-title': 'Pass the policies test',
+                'task5-title': 'Submit first week report',
+                'certificates-title': 'Certificates',
+                'cert1-name': 'Basic Training Completion Certificate',
+                'cert2-name': 'Company Policies Certificate',
+                'upload-title': 'Upload Files',
+                'choose-file-label': 'Choose a file',
+                'file-desc-label': 'File Description',
+                'upload-file-btn': 'Upload File',
+                'uploaded-files-title': 'Your Uploaded Files',
+                'create-post-title': 'Create Post',
+                'post-title-label': 'Post Title',
+                'post-content-label': 'Post Content',
+                'create-post-btn': 'Publish Post',
+                'comm-title': 'Inter-Department Communication',
+                'select-dept-label': 'Select Department',
+                'message-label': 'Message Content',
+                'send-message-btn': 'Send Message',
+                'posts-title': 'Posts and Messages',
+                'courses-title': 'IT Courses',
+                'course1-title': 'Networking Basics',
+                'course1-desc': 'Learn the basic concepts of networking and how they work',
+                'course2-title': 'Information Security',
+                'course2-desc': 'Protecting data and systems from security threats',
+                'course3-title': 'Server Management',
+                'course3-desc': 'Managing and maintaining servers to ensure efficient operation',
+                'course4-title': 'Web Development',
+                'course4-desc': 'Principles of website and application development',
+                'register-course1-btn': 'Register for Course',
+                'register-course2-btn': 'Register for Course',
+                'register-course3-btn': 'Register for Course',
+                'register-course4-btn': 'Register for Course',
+                'settings-title': 'Settings',
+                'lang-title': 'Language',
+                'arabic-text': 'Arabic Language',
+                'english-text': 'English Language',
+                'theme-title': 'Appearance',
+                'light-mode-text': 'Light Mode',
+                'dark-mode-text': 'Dark Mode',
+                'notification-settings-title': 'Notifications',
+                'email-notif-text': 'Email Notifications',
+                'push-notif-text': 'Push Notifications',
+                'profile-title': 'Personal Profile',
+                'profile-page-title': 'Personal Profile',
+                'posts-stat': 'Posts',
+                'files-stat': 'Files',
+                'deleted-stat': 'Deleted',
+                'profile-posts-stat': 'Posts',
+                'profile-files-stat': 'Files',
+                'profile-deleted-stat': 'Deleted',
+                'posts-tab-btn': 'Posts',
+                'deleted-tab-btn': 'Deleted',
+                'profile-posts-tab-btn': 'Posts',
+                'profile-deleted-tab-btn': 'Deleted',
+                'ai-title': 'EGAS Smart Assistant',
+                'ai-greeting': 'Hello! I am your smart assistant in the EGAS application. How can I help you today?',
+                'ai-send-btn': 'Send',
+                'register-modal-title': 'Create New Account',
+                'reg-username-label': 'Username',
+                'reg-password-label': 'Password',
+                'reg-confirm-label': 'Confirm Password',
+                'reg-email-label': 'Email Address',
+                'register-btn': 'Create Account',
+                'forgot-modal-title': 'Reset Password',
+                'forgot-username-label': 'Username',
+                'forgot-email-label': 'Email Address',
+                'forgot-btn': 'Send Reset Link',
+                'home-link': 'Home',
+                'dashboard-link': 'Dashboard',
+                'settings-link': 'Settings',
+                'profile-link': 'Profile',
+                'logout-link': 'Logout',
+                'back-dashboard-text': 'Back',
+                'notifications-title': 'Notifications',
+                'filter-title': 'Filter Posts by Department',
+                'apply-filter': 'Apply',
+                'reset-filter': 'Reset',
+                'success-notification': 'Operation completed successfully',
+                'error-notification': 'An error occurred',
+                'warning-notification': 'Warning',
+                'login-error': 'Incorrect login information',
+                'empty-fields': 'Please fill in all fields',
+                'password-mismatch': 'Passwords do not match',
+                'account-created': 'Account created successfully',
+                'password-reset': 'Password reset link has been sent',
+                'file-uploaded': 'File uploaded successfully',
+                'post-created': 'Post published successfully',
+                'message-sent': 'Message sent successfully',
+                'logout-success': 'Logged out successfully',
+                'lang-changed': 'Language changed successfully',
+                'theme-changed': 'Appearance changed successfully',
+                'one-lang': 'Please select only one language',
+                'one-theme': 'Please select only one mode',
+                'select-file': 'Please select a file first',
+                'enter-title': 'Please enter post title',
+                'enter-content': 'Please enter post content',
+                'select-dept': 'Please select a department first',
+                'enter-message': 'Please enter message content',
+                'restricted-access': 'Access to this department is prohibited for trainees',
+                'restricted-department': 'This department is available for employees only',
+                'filter-applied': 'Filter applied successfully',
+                'filter-reset': 'Filter has been reset',
+                'comment-added': 'Comment added successfully',
+                'reply-added': 'Reply added successfully',
+                'private-message-sent': 'Private message sent successfully'
+            }
+        };
+        
+        // Global variables
+        let currentUser = null;
+        let currentUserType = null;
+        let currentDepartment = null;
+        let currentLanguage = 'ar';
+        let selectedDepartments = ['all'];
+        let notificationCount = 3;
+        
+        // DOM elements
+        const loginSection = document.getElementById('login-section');
+        const departmentSelection = document.getElementById('department-selection');
+        const traineeDashboard = document.getElementById('trainee-dashboard');
+        const employeeDashboard = document.getElementById('employee-dashboard');
+        const settingsSection = document.getElementById('settings-section');
+        const profileSection = document.getElementById('profile-section');
+        const employeeProfile = document.getElementById('employee-profile');
+        const notification = document.getElementById('notification');
+        const notificationTitle = document.getElementById('notification-title');
+        const notificationMessage = document.getElementById('notification-message');
+        const notificationLink = document.getElementById('notification-link');
+        const sidebar = document.getElementById('sidebar');
+        const notificationsPanel = document.getElementById('notifications-panel');
+        const notificationBadge = document.getElementById('notification-count');
+        
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is already logged in
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                const user = JSON.parse(savedUser);
+                currentUser = user.username;
+                currentUserType = user.type;
+                currentDepartment = user.department;
+                
+                showSidebar();
+                
+                if (currentUserType === 'trainee') {
+                    showTraineeDashboard();
+                } else {
+                    showEmployeeDashboard();
+                }
+            } else {
+                hideSidebar();
+                showLoginSection();
+            }
+            
+            // Event listeners
+            document.getElementById('login-form').addEventListener('submit', handleLogin);
+            document.getElementById('register-link').addEventListener('click', showRegisterModal);
+            document.getElementById('forgot-password-link').addEventListener('click', showForgotPasswordModal);
+            
+            // Sidebar navigation
+            document.getElementById('sidebar-home').addEventListener('click', handleHomeLink);
+            document.getElementById('sidebar-dashboard').addEventListener('click', handleDashboardLink);
+            document.getElementById('sidebar-notifications').addEventListener('click', toggleNotificationsPanel);
+            document.getElementById('sidebar-settings').addEventListener('click', handleSettingsLink);
+            document.getElementById('sidebar-profile').addEventListener('click', handleProfileLink);
+            document.getElementById('sidebar-logout').addEventListener('click', handleLogout);
+            
+            // Notifications panel
+            document.getElementById('notifications-close').addEventListener('click', toggleNotificationsPanel);
+            
+            // Back buttons
+            document.getElementById('back-to-login').addEventListener('click', showLoginSection);
+            document.getElementById('back-to-department').addEventListener('click', showDepartmentSelection);
+            document.getElementById('back-to-department-emp').addEventListener('click', showDepartmentSelection);
+            document.getElementById('back-to-dashboard').addEventListener('click', handleDashboardLink);
+            
+            // Department selection
+            document.querySelectorAll('.department-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const deptId = this.getAttribute('data-dept');
+                    selectDepartment(deptId);
+                });
+            });
+            
+            // Settings
+            document.getElementById('arabic-lang').addEventListener('change', handleLanguageChange);
+            document.getElementById('english-lang').addEventListener('change', handleLanguageChange);
+            document.getElementById('light-mode').addEventListener('change', handleThemeChange);
+            document.getElementById('dark-mode').addEventListener('change', handleThemeChange);
+            
+            // Tabs
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    showTab(tabId);
+                });
+            });
+            
+            // AI Assistant
+            document.getElementById('ai-assistant-btn').addEventListener('click', toggleAIChat);
+            document.getElementById('ai-chat-close').addEventListener('click', toggleAIChat);
+            document.getElementById('ai-send-btn').addEventListener('click', sendAIMessage);
+            document.getElementById('ai-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendAIMessage();
+                }
+            });
+            
+            // File upload
+            document.getElementById('upload-file-btn').addEventListener('click', handleFileUpload);
+            
+            // Create post
+            document.getElementById('create-post-btn').addEventListener('click', handleCreatePost);
+            
+            // Send message
+            document.getElementById('send-message-btn').addEventListener('click', handleSendMessage);
+            
+            // Feed filter
+            document.getElementById('feed-department-filter').addEventListener('change', applyFeedFilter);
+            
+            // Post actions
+            document.querySelectorAll('.post-action').forEach(action => {
+                action.addEventListener('click', handlePostAction);
+            });
+            
+            // Comment actions
+            document.querySelectorAll('.comment-action').forEach(action => {
+                action.addEventListener('click', handleCommentAction);
+            });
+            
+            // Private message buttons
+            document.querySelectorAll('.private-message-btn').forEach(btn => {
+                btn.addEventListener('click', handlePrivateMessage);
+            });
+            
+            // Comment submit
+            document.querySelectorAll('.comment-submit').forEach(btn => {
+                btn.addEventListener('click', handleCommentSubmit);
+            });
+            
+            // Modals
+            document.getElementById('register-modal-close').addEventListener('click', closeRegisterModal);
+            document.getElementById('forgot-password-modal-close').addEventListener('click', closeForgotPasswordModal);
+            document.getElementById('register-form').addEventListener('submit', handleRegister);
+            document.getElementById('forgot-password-form').addEventListener('submit', handleForgotPassword);
+            
+            // Notification items
+            document.querySelectorAll('.notification-item').forEach(item => {
+                item.addEventListener('click', handleNotificationClick);
+            });
+            
+            // Simulate meeting reminders
+            setTimeout(() => {
+                showMeetingReminder();
+            }, 5000);
+            
+            // Simulate new notifications
+            setTimeout(() => {
+                addNewNotification();
+            }, 10000);
+        });
+        
+        // Login handler
+        function handleLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Check if it's a trainee login
+            if (username === 'guest' && password === 'm123456789') {
+                currentUser = username;
+                currentUserType = 'trainee';
+                showDepartmentSelection();
+            } else if (username && password) {
+                // Employee login
+                currentUser = username;
+                currentUserType = 'employee';
+                showDepartmentSelection();
+            } else {
+                showNotification(translations[currentLanguage]['login-error'], 'error');
+            }
+        }
+        
+        // Department selection
+        function showDepartmentSelection() {
+            hideAllSections();
+            departmentSelection.classList.remove('hidden');
+        }
+        
+        function selectDepartment(deptId) {
+            // Check if department is restricted for trainees
+            if (currentUserType === 'trainee' && (deptId == 12 || deptId == 13)) {
+                showNotification(translations[currentLanguage]['restricted-access'], 'error');
+                return;
+            }
+            
+            currentDepartment = deptId;
+            
+            // Save user data
+            const userData = {
+                username: currentUser,
+                type: currentUserType,
+                department: currentDepartment
+            };
+            localStorage.setItem('currentUser', JSON.stringify(userData));
+            
+            showSidebar();
+            
+            if (currentUserType === 'trainee') {
+                showTraineeDashboard();
+            } else {
+                showEmployeeDashboard();
+            }
+        }
+        
+        // Dashboard handlers
+        function showTraineeDashboard() {
+            hideAllSections();
+            traineeDashboard.classList.remove('hidden');
+            updateUserInfo();
+            setActiveSidebarIcon('sidebar-home');
+        }
+        
+        function showEmployeeDashboard() {
+            hideAllSections();
+            employeeDashboard.classList.remove('hidden');
+            updateUserInfo();
+            setActiveSidebarIcon('sidebar-home');
+        }
+        
+        // Settings handlers
+        function handleSettingsLink(e) {
+            e.preventDefault();
+            hideAllSections();
+            settingsSection.classList.remove('hidden');
+            setActiveSidebarIcon('sidebar-settings');
+            
+            if (currentUserType === 'employee') {
+                employeeProfile.classList.remove('hidden');
+            } else {
+                employeeProfile.classList.add('hidden');
+            }
+        }
+        
+        // Profile handler
+        function handleProfileLink(e) {
+            e.preventDefault();
+            hideAllSections();
+            profileSection.classList.remove('hidden');
+            updateUserInfo();
+            setActiveSidebarIcon('sidebar-profile');
+        }
+        
+        // Sidebar handlers
+        function showSidebar() {
+            sidebar.style.display = 'flex';
+            
+            // For trainees, hide notifications and profile icons
+            if (currentUserType === 'trainee') {
+                document.getElementById('sidebar-notifications').style.display = 'none';
+                document.getElementById('sidebar-profile').style.display = 'none';
+            } else {
+                document.getElementById('sidebar-notifications').style.display = 'flex';
+                document.getElementById('sidebar-profile').style.display = 'flex';
+            }
+        }
+        
+        function hideSidebar() {
+            sidebar.style.display = 'none';
+        }
+        
+        function setActiveSidebarIcon(iconId) {
+            document.querySelectorAll('.sidebar-icon').forEach(icon => {
+                icon.classList.remove('active');
+            });
+            document.getElementById(iconId).classList.add('active');
+        }
+        
+        // Notifications panel
+        function toggleNotificationsPanel() {
+            const isVisible = notificationsPanel.style.display === 'flex';
+            notificationsPanel.style.display = isVisible ? 'none' : 'flex';
+            
+            if (!isVisible) {
+                // Reset notification count when opening
+                notificationBadge.textContent = '0';
+                notificationBadge.style.display = 'none';
+            }
+        }
+        
+        // Language and theme handlers
+        function handleLanguageChange(e) {
+            const isArabic = document.getElementById('arabic-lang').checked;
+            const isEnglish = document.getElementById('english-lang').checked;
+            
+            if (isArabic && isEnglish) {
+                e.target.checked = false;
+                showNotification(translations[currentLanguage]['one-lang'], 'warning');
+                return;
+            }
+            
+            if (isArabic) {
+                currentLanguage = 'ar';
+                document.documentElement.lang = 'ar';
+                document.documentElement.dir = 'rtl';
+                updateLanguage();
+                showNotification(translations[currentLanguage]['lang-changed'], 'success');
+            } else if (isEnglish) {
+                currentLanguage = 'en';
+                document.documentElement.lang = 'en';
+                document.documentElement.dir = 'ltr';
+                updateLanguage();
+                showNotification(translations[currentLanguage]['lang-changed'], 'success');
+            }
+        }
+        
+        function handleThemeChange(e) {
+            const isLight = document.getElementById('light-mode').checked;
+            const isDark = document.getElementById('dark-mode').checked;
+            
+            if (isLight && isDark) {
+                e.target.checked = false;
+                showNotification(translations[currentLanguage]['one-theme'], 'warning');
+                return;
+            }
+            
+            if (isLight) {
+                document.body.classList.remove('dark-mode');
+                showNotification(translations[currentLanguage]['theme-changed'], 'success');
+            } else if (isDark) {
+                document.body.classList.add('dark-mode');
+                showNotification(translations[currentLanguage]['theme-changed'], 'success');
+            }
+        }
+        
+        // Update language
+        function updateLanguage() {
+            // Update all text elements with language-specific content
+            Object.keys(translations[currentLanguage]).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    // Handle special cases
+                    if (key === 'ai-input') {
+                        element.placeholder = translations[currentLanguage][key];
+                    } else if (key === 'username' || key === 'password' || 
+                              key === 'file-description' || key === 'post-title' || 
+                              key === 'post-content' || key === 'message-content' ||
+                              key === 'reg-username' || key === 'reg-password' || 
+                              key === 'reg-confirm-password' || key === 'reg-email' ||
+                              key === 'forgot-username' || key === 'forgot-email') {
+                        element.placeholder = translations[currentLanguage][key];
+                    } else {
+                        element.textContent = translations[currentLanguage][key];
+                    }
+                }
+            });
+            
+            // Update placeholder for department select
+            const deptSelect = document.getElementById('department-select');
+            if (deptSelect) {
+                deptSelect.options[0].text = currentLanguage === 'ar' ? '-- اختر الإدارة --' : '-- Select Department --';
+            }
+            
+            // Update feed filter
+            const feedFilter = document.getElementById('feed-department-filter');
+            if (feedFilter) {
+                feedFilter.options[0].text = currentLanguage === 'ar' ? 'جميع الإدارات' : 'All Departments';
+            }
+        }
+        
+        // Tab handler
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+            document.getElementById(`${tabId}-tab`).classList.add('active');
+        }
+        
+        // AI Assistant
+        function toggleAIChat() {
+            const aiChat = document.getElementById('ai-chat');
+            aiChat.style.display = aiChat.style.display === 'flex' ? 'none' : 'flex';
+        }
+        
+        function sendAIMessage() {
+            const input = document.getElementById('ai-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addAIMessage(message, 'user');
+            input.value = '';
+            
+            // Simulate AI response
+            setTimeout(() => {
+                const responses = currentLanguage === 'ar' ? [
+                    "يمكنني مساعدتك في معرفة المزيد عن سياسات الشركة.",
+                    "للاستفسار عن الاجتماعات القادمة، يرجى مراجعة قسم التقويم.",
+                    "يمكنك العثور على جميع الملفات اللازمة في قسم الملفات.",
+                    "إذا كنت بحاجة إلى مساعدة تقنية، يرجى التواصل مع إادة تقنية المعلومات.",
+                    "للتسجيل في الكورسات المتاحة، يرجى زيارة قسم الكورسات."
+                ] : [
+                    "I can help you learn more about company policies.",
+                    "For inquiries about upcoming meetings, please check the calendar section.",
+                    "You can find all the necessary files in the files section.",
+                    "If you need technical assistance, please contact the IT department.",
+                    "To register for available courses, please visit the courses section."
+                ];
+                
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                addAIMessage(randomResponse, 'ai');
+            }, 1000);
+        }
+        
+        function addAIMessage(message, sender) {
+            const chatBody = document.getElementById('ai-chat-body');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('ai-message', sender);
+            messageDiv.textContent = message;
+            chatBody.appendChild(messageDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+        
+        // File upload
+        function handleFileUpload() {
+            const fileInput = document.getElementById('file-upload');
+            const description = document.getElementById('file-description').value;
+            
+            if (!fileInput.files.length) {
+                showNotification(translations[currentLanguage]['select-file'], 'error');
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            const fileName = file.name;
+            
+            // Add file to the list
+            const fileItem = document.createElement('div');
+            fileItem.classList.add('file-item');
+            
+            const fileIcon = getFileIcon(fileName);
+            
+            fileItem.innerHTML = `
+                <div class="file-icon">
+                    <i class="${fileIcon}"></i>
+                </div>
+                <div class="file-details">
+                    <div class="file-name">${fileName}</div>
+                    <div class="file-meta">${formatFileSize(file.size)} • ${currentLanguage === 'ar' ? 'تم الإضافة' : 'Added'}: ${new Date().toLocaleDateString()}</div>
+                </div>
+            `;
+            
+            document.getElementById('employee-files').prepend(fileItem);
+            
+            // Reset form
+            fileInput.value = '';
+            document.getElementById('file-description').value = '';
+            
+            showNotification(translations[currentLanguage]['file-uploaded'], 'success');
+        }
+        
+        function getFileIcon(fileName) {
+            const extension = fileName.split('.').pop().toLowerCase();
+            
+            switch (extension) {
+                case 'pdf': return 'fas fa-file-pdf';
+                case 'doc':
+                case 'docx': return 'fas fa-file-word';
+                case 'xls':
+                case 'xlsx': return 'fas fa-file-excel';
+                case 'ppt':
+                case 'pptx': return 'fas fa-file-powerpoint';
+                case 'jpg':
+                case 'jpeg':
+                case 'png':
+                case 'gif': return 'fas fa-file-image';
+                case 'mp4':
+                case 'avi':
+                case 'mov': return 'fas fa-file-video';
+                default: return 'fas fa-file';
+            }
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        // Create post
+        function handleCreatePost() {
+            const title = document.getElementById('post-title').value;
+            const content = document.getElementById('post-content').value;
+            
+            if (!title) {
+                showNotification(translations[currentLanguage]['enter-title'], 'error');
+                return;
+            }
+            
+            if (!content) {
+                showNotification(translations[currentLanguage]['enter-content'], 'error');
+                return;
+            }
+            
+            // Add post to the list
+            const postItem = document.createElement('div');
+            postItem.classList.add('post-item');
+            postItem.setAttribute('data-dept', currentDepartment);
+            
+            const departmentName = getDepartmentName(currentDepartment);
+            
+            postItem.innerHTML = `
+                <div class="post-header">
+                    <div>
+                        <div class="post-author">${title}</div>
+                        <div class="post-department">${departmentName}</div>
+                    </div>
+                    <div>${new Date().toLocaleDateString()}</div>
+                </div>
+                <div class="post-content">
+                    ${content}
+                </div>
+                <div class="post-actions">
+                    <span class="post-action" data-action="like"><i class="far fa-heart"></i> 0 ${currentLanguage === 'ar' ? 'إعجاب' : 'likes'}</span>
+                    <span class="post-action" data-action="comment"><i class="far fa-comment"></i> 0 ${currentLanguage === 'ar' ? 'تعليقات' : 'comments'}</span>
+                    <span class="post-action" data-action="share"><i class="far fa-share"></i> ${currentLanguage === 'ar' ? 'مشاركة' : 'share'}</span>
+                </div>
+                <div class="comments-section" style="display: none;">
+                    <div class="comment-form">
+                        <input type="text" class="comment-input" placeholder="${currentLanguage === 'ar' ? 'أضف تعليقاً...' : 'Add a comment...'}">
+                        <div class="comment-actions-form">
+                            <button class="comment-submit">${currentLanguage === 'ar' ? 'نشر' : 'Post'}</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('posts-container').prepend(postItem);
+            
+            // Reset form
+            document.getElementById('post-title').value = '';
+            document.getElementById('post-content').value = '';
+            
+            showNotification(translations[currentLanguage]['post-created'], 'success');
+            
+            // Apply current filter to show the new post
+            applyFeedFilter();
+            
+            // Add event listeners to new post
+            const newPostActions = postItem.querySelectorAll('.post-action');
+            newPostActions.forEach(action => {
+                action.addEventListener('click', handlePostAction);
+            });
+            
+            const newCommentSubmit = postItem.querySelector('.comment-submit');
+            newCommentSubmit.addEventListener('click', handleCommentSubmit);
+        }
+        
+        // Send message
+        function handleSendMessage() {
+            const departmentId = document.getElementById('department-select').value;
+            const messageContent = document.getElementById('message-content').value;
+            
+            if (!departmentId) {
+                showNotification(translations[currentLanguage]['select-dept'], 'error');
+                return;
+            }
+            
+            if (!messageContent) {
+                showNotification(translations[currentLanguage]['enter-message'], 'error');
+                return;
+            }
+            
+            // Add message as a post
+            const postItem = document.createElement('div');
+            postItem.classList.add('post-item');
+            postItem.setAttribute('data-dept', departmentId);
+            
+            const departmentName = getDepartmentName(departmentId);
+            const fromDepartment = getDepartmentName(currentDepartment);
+            
+            postItem.innerHTML = `
+                <div class="post-header">
+                    <div>
+                        <div class="post-author">${currentLanguage === 'ar' ? 'رسالة إلى' : 'Message to'} ${departmentName}</div>
+                        <div class="post-department">${currentLanguage === 'ar' ? 'من' : 'From'} ${fromDepartment}</div>
+                    </div>
+                    <div>${new Date().toLocaleDateString()}</div>
+                </div>
+                <div class="post-content">
+                    ${messageContent}
+                </div>
+                <div class="post-actions">
+                    <span class="post-action" data-action="like"><i class="far fa-heart"></i> 0 ${currentLanguage === 'ar' ? 'إعجاب' : 'likes'}</span>
+                    <span class="post-action" data-action="comment"><i class="far fa-comment"></i> 0 ${currentLanguage === 'ar' ? 'تعليقات' : 'comments'}</span>
+                    <span class="post-action" data-action="share"><i class="far fa-share"></i> ${currentLanguage === 'ar' ? 'مشاركة' : 'share'}</span>
+                </div>
+                <div class="comments-section" style="display: none;">
+                    <div class="comment-form">
+                        <input type="text" class="comment-input" placeholder="${currentLanguage === 'ar' ? 'أضف تعليقاً...' : 'Add a comment...'}">
+                        <div class="comment-actions-form">
+                            <button class="comment-submit">${currentLanguage === 'ar' ? 'نشر' : 'Post'}</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('posts-container').prepend(postItem);
+            
+            // Reset form
+            document.getElementById('department-select').value = '';
+            document.getElementById('message-content').value = '';
+            
+            showNotification(translations[currentLanguage]['message-sent'], 'success');
+            
+            // Apply current filter to show the new post
+            applyFeedFilter();
+            
+            // Add event listeners to new post
+            const newPostActions = postItem.querySelectorAll('.post-action');
+            newPostActions.forEach(action => {
+                action.addEventListener('click', handlePostAction);
+            });
+            
+            const newCommentSubmit = postItem.querySelector('.comment-submit');
+            newCommentSubmit.addEventListener('click', handleCommentSubmit);
+        }
+        
+        // Feed filter
+        function applyFeedFilter() {
+            const selectedDept = document.getElementById('feed-department-filter').value;
+            const posts = document.querySelectorAll('#posts-container .post-item');
+            
+            posts.forEach(post => {
+                const postDept = post.getAttribute('data-dept');
+                
+                if (selectedDept === 'all' || postDept === selectedDept) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        }
+        
+        // Post actions
+        function handlePostAction(e) {
+            const action = e.currentTarget.getAttribute('data-action');
+            const postItem = e.currentTarget.closest('.post-item');
+            
+            if (action === 'like') {
+                // Toggle like
+                const icon = e.currentTarget.querySelector('i');
+                const countText = e.currentTarget.textContent.trim();
+                const count = parseInt(countText.split(' ')[0]);
+                
+                if (icon.classList.contains('far')) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    e.currentTarget.innerHTML = `<i class="fas fa-heart"></i> ${count + 1} ${currentLanguage === 'ar' ? 'إعجاب' : 'likes'}`;
+                } else {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    e.currentTarget.innerHTML = `<i class="far fa-heart"></i> ${count - 1} ${currentLanguage === 'ar' ? 'إعجاب' : 'likes'}`;
+                }
+            } else if (action === 'comment') {
+                // Toggle comments section
+                const commentsSection = postItem.querySelector('.comments-section');
+                if (commentsSection.style.display === 'none') {
+                    commentsSection.style.display = 'block';
+                } else {
+                    commentsSection.style.display = 'none';
+                }
+            } else if (action === 'share') {
+                // Show share notification
+                showNotification(
+                    currentLanguage === 'ar' ? 'تم نسخ رابط المنشور' : 'Post link copied to clipboard',
+                    'success'
+                );
+            }
+        }
+        
+        // Comment actions
+        function handleCommentAction(e) {
+            const action = e.currentTarget.getAttribute('data-action');
+            const commentItem = e.currentTarget.closest('.comment-item');
+            
+            if (action === 'like') {
+                // Toggle like
+                const currentText = e.currentTarget.textContent;
+                if (currentText === currentLanguage === 'ar' ? 'إعجاب' : 'Like') {
+                    e.currentTarget.textContent = currentLanguage === 'ar' ? 'مُعجَب' : 'Liked';
+                } else {
+                    e.currentTarget.textContent = currentLanguage === 'ar' ? 'إعجاب' : 'Like';
+                }
+            } else if (action === 'reply') {
+                // Toggle reply form
+                const repliesSection = commentItem.querySelector('.replies-section');
+                if (repliesSection.style.display === 'none') {
+                    repliesSection.style.display = 'block';
+                } else {
+                    repliesSection.style.display = 'none';
+                }
+            }
+        }
+        
+        // Private message
+        function handlePrivateMessage(e) {
+            const commentItem = e.currentTarget.closest('.comment-item');
+            const author = commentItem.querySelector('.comment-author').textContent;
+            
+            showNotification(
+                currentLanguage === 'ar' ? `فتح محادثة خاصة مع ${author}` : `Opening private chat with ${author}`,
+                'success'
+            );
+        }
+        
+        // Comment submit
+        function handleCommentSubmit(e) {
+            const commentForm = e.currentTarget.closest('.comment-form');
+            const commentInput = commentForm.querySelector('.comment-input');
+            const commentText = commentInput.value.trim();
+            
+            if (!commentText) return;
+            
+            const commentsSection = e.currentTarget.closest('.comments-section');
+            
+            // Create new comment
+            const commentItem = document.createElement('div');
+            commentItem.classList.add('comment-item');
+            
+            commentItem.innerHTML = `
+                <div class="comment-author">${currentUser}</div>
+                <div class="comment-content">${commentText}</div>
+                <div class="comment-actions">
+                    <span class="comment-action" data-action="like">${currentLanguage === 'ar' ? 'إعجاب' : 'Like'}</span>
+                    <span class="comment-action" data-action="reply">${currentLanguage === 'ar' ? 'رد' : 'Reply'}</span>
+                    <button class="private-message-btn">${currentLanguage === 'ar' ? 'رسالة خاصة' : 'Private Message'}</button>
+                </div>
+                <div class="replies-section" style="display: none;"></div>
+            `;
+            
+            // Insert before the comment form
+            commentsSection.insertBefore(commentItem, commentForm);
+            
+            // Clear input
+            commentInput.value = '';
+            
+            // Update comment count
+            const postItem = commentsSection.closest('.post-item');
+            const commentAction = postItem.querySelector('.post-action[data-action="comment"]');
+            const countText = commentAction.textContent.trim();
+            const count = parseInt(countText.split(' ')[0]);
+            commentAction.innerHTML = `<i class="far fa-comment"></i> ${count + 1} ${currentLanguage === 'ar' ? 'تعليقات' : 'comments'}`;
+            
+            // Add event listeners
+            const newCommentActions = commentItem.querySelectorAll('.comment-action');
+            newCommentActions.forEach(action => {
+                action.addEventListener('click', handleCommentAction);
+            });
+            
+            const newPrivateMessageBtn = commentItem.querySelector('.private-message-btn');
+            newPrivateMessageBtn.addEventListener('click', handlePrivateMessage);
+            
+            showNotification(translations[currentLanguage]['comment-added'], 'success');
+        }
+        
+        // Notification click
+        function handleNotificationClick(e) {
+            const notificationItem = e.currentTarget;
+            const notificationId = notificationItem.getAttribute('data-id');
+            
+            // Show expanded notification
+            showExpandedNotification(notificationId);
+            
+            // Mark as read
+            notificationItem.style.backgroundColor = '#f9fafb';
+            
+            // Decrease notification count
+            notificationCount--;
+            if (notificationCount <= 0) {
+                notificationBadge.style.display = 'none';
+            } else {
+                notificationBadge.textContent = notificationCount;
+            }
+        }
+        
+        // Show expanded notification
+        function showExpandedNotification(notificationId) {
+            const notifications = {
+                '1': {
+                    title: currentLanguage === 'ar' ? 'اجتماع جديد' : 'New Meeting',
+                    message: currentLanguage === 'ar' ? 'تم تحديد اجتماع مع إدارة الموارد البشرية يوم الخميس الساعة 10 صباحاً' : 'A meeting with HR Department has been scheduled for Thursday at 10 AM',
+                    link: currentLanguage === 'ar' ? 'عرض التفاصيل' : 'View Details'
+                },
+                '2': {
+                    title: currentLanguage === 'ar' ? 'تذكير بمهمة' : 'Task Reminder',
+                    message: currentLanguage === 'ar' ? 'الموعد النهائي لتقديم تقرير الأداء غداً' : 'The deadline for submitting the performance report is tomorrow',
+                    link: currentLanguage === 'ar' ? 'عرض المهمة' : 'View Task'
+                },
+                '3': {
+                    title: currentLanguage === 'ar' ? 'رسالة جديدة' : 'New Message',
+                    message: currentLanguage === 'ar' ? 'لديك رسالة جديدة من إدارة تقنية المعلومات' : 'You have a new message from the IT Department',
+                    link: currentLanguage === 'ar' ? 'فتح الرسالة' : 'Open Message'
+                }
+            };
+            
+            const notification = notifications[notificationId];
+            
+            notificationTitle.textContent = notification.title;
+            notificationMessage.textContent = notification.message;
+            notificationLink.textContent = notification.link;
+            notificationLink.style.display = 'block';
+            notificationLink.href = '#';
+            
+            notification.classList.add('notification-expanded');
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Add new notification
+        function addNewNotification() {
+            const notificationsBody = document.getElementById('notifications-body');
+            
+            const newNotification = document.createElement('div');
+            newNotification.classList.add('notification-item');
+            newNotification.setAttribute('data-id', '4');
+            
+            newNotification.innerHTML = `
+                <div class="notification-title">${currentLanguage === 'ar' ? 'تحديث النظام' : 'System Update'}</div>
+                <div class="notification-message">${currentLanguage === 'ar' ? 'سيتم تحديث النظام يوم السبت المقبل من الساعة 9 صباحاً حتى 12 ظهراً' : 'The system will be updated next Saturday from 9 AM to 12 PM'}</div>
+                <div class="notification-time">${currentLanguage === 'ar' ? 'الآن' : 'Just now'}</div>
+            `;
+            
+            notificationsBody.prepend(newNotification);
+            
+            // Increase notification count
+            notificationCount++;
+            notificationBadge.textContent = notificationCount;
+            notificationBadge.style.display = 'flex';
+            
+            // Add event listener
+            newNotification.addEventListener('click', handleNotificationClick);
+            
+            // Show notification
+            showNotification(
+                currentLanguage === 'ar' ? 'لديك إشعار جديد' : 'You have a new notification',
+                'success'
+            );
+        }
+        
+        // Utility functions
+        function getDepartmentName(deptId) {
+            const departments = currentLanguage === 'ar' ? {
+                '1': 'نظم المعلومات والاتصالات',
+                '2': 'حماية البيئة',
+                '3': 'أنشطة المسؤولية المجتمعية',
+                '4': 'المكتب الفني والمشاريع الخاصة',
+                '5': 'المراجعة والمتابعة',
+                '6': 'العلاقات العامة',
+                '7': 'العلاقات الدولية',
+                '8': 'العلاقات الحكومية',
+                '9': 'العقود',
+                '10': 'الشؤون الطبية والعلاجية',
+                '11': 'السلامة والصحة المهنية',
+                '12': 'الأمن',
+                '13': 'الأمانة العامة لمجلس الإدارة',
+                '14': 'الإعلام',
+                '15': 'الاستراتيجيات ودعم اتخاذ القرار',
+                '16': 'تحول الطاقة والاستدامة',
+                '17': 'العمليات والشبكات',
+                '18': 'الشؤون المالية',
+                '19': 'الشؤون القانونية',
+                '20': 'الشؤون الإدارية',
+                '21': 'الرقابة على شركات الأجنبي',
+                '22': 'التخطيط ومشاريع الغاز',
+                '23': 'الإدارة الداخلية في شؤن الاقتصاد',
+                '24': 'التجارة الخارجية',
+                '25': 'التبعية لرئيس مجلس الإدارة',
+                '26': 'الإنتاج وتنمية الحقول',
+                '27': 'الاتفاقيات والاستكشاف'
+            } : {
+                '1': 'Information Systems and Communications',
+                '2': 'Environmental Protection',
+                '3': 'Corporate Social Responsibility Activities',
+                '4': 'Technical Office and Special Projects',
+                '5': 'Review and Follow-up',
+                '6': 'Public Relations',
+                '7': 'International Relations',
+                '8': 'Governmental Relations',
+                '9': 'Contracts',
+                '10': 'Medical and Therapeutic Affairs',
+                '11': 'Occupational Safety and Health',
+                '12': 'Security',
+                '13': 'General Secretariat of the Board of Directors',
+                '14': 'Media',
+                '15': 'Strategies and Decision Support',
+                '16': 'Energy Transition and Sustainability',
+                '17': 'Operations and Networks',
+                '18': 'Financial Affairs',
+                '19': 'Legal Affairs',
+                '20': 'Administrative Affairs',
+                '21': 'Control of Foreign Companies',
+                '22': 'Planning and Gas Projects',
+                '23': 'Internal Administration in Economic Affairs',
+                '24': 'Foreign Trade',
+                '25': 'Subordination to the Chairman of the Board of Directors',
+                '26': 'Production and Field Development',
+                '27': 'Agreements and Exploration'
+            };
+            
+            return departments[deptId] || (currentLanguage === 'ar' ? 'غير معروف' : 'Unknown');
+        }
+        
+        function showNotification(message, type = 'success', title = null, link = null) {
+            notificationTitle.textContent = title || translations[currentLanguage]['success-notification'];
+            notificationMessage.textContent = message;
+            
+            if (link) {
+                notificationLink.textContent = link;
+                notificationLink.style.display = 'block';
+                notificationLink.href = '#';
+            } else {
+                notificationLink.style.display = 'none';
+            }
+            
+            notification.className = 'notification';
+            
+            if (type === 'error') {
+                notification.classList.add('error');
+                notification.querySelector('i').className = 'fas fa-exclamation-circle';
+            } else if (type === 'warning') {
+                notification.classList.add('warning');
+                notification.querySelector('i').className = 'fas fa-exclamation-triangle';
+            } else {
+                notification.querySelector('i').className = 'fas fa-check-circle';
+            }
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        function updateUserInfo() {
+            document.getElementById('user-name').textContent = currentUser;
+            document.getElementById('user-avatar').textContent = currentUser.charAt(0).toUpperCase();
+            
+            if (currentUserType === 'employee') {
+                const deptName = getDepartmentName(currentDepartment);
+                document.getElementById('profile-name').textContent = currentUser;
+                document.getElementById('profile-avatar').textContent = currentUser.charAt(0).toUpperCase();
+                document.getElementById('profile-role').textContent = (currentLanguage === 'ar' ? 'موظف في ' : 'Employee in ') + deptName;
+                
+                // Update profile page
+                document.getElementById('profile-page-name').textContent = currentUser;
+                document.getElementById('profile-page-avatar').textContent = currentUser.charAt(0).toUpperCase();
+                document.getElementById('profile-page-role').textContent = (currentLanguage === 'ar' ? 'موظف في ' : 'Employee in ') + deptName;
+            }
+        }
+        
+        function showMeetingReminder() {
+            const reminders = currentLanguage === 'ar' ? [
+                {
+                    text: 'اجتماع مع إدارة الموارد البشرية غداً الساعة 10 صباحاً',
+                    target: 'trainee'
+                },
+                {
+                    text: 'اجتماع مع إدارة تقنية المعلومات بعد ساعة',
+                    target: 'employee'
+                }
+            ] : [
+                {
+                    text: 'Meeting with HR Department tomorrow at 10 AM',
+                    target: 'trainee'
+                },
+                {
+                    text: 'Meeting with IT Department in one hour',
+                    target: 'employee'
+                }
+            ];
+            
+            const reminder = reminders[Math.floor(Math.random() * reminders.length)];
+            
+            if (reminder.target === 'trainee' && currentUserType === 'trainee') {
+                document.getElementById('meeting-text').textContent = reminder.text;
+                document.getElementById('meeting-reminders').classList.remove('hidden');
+            } else if (reminder.target === 'employee' && currentUserType === 'employee') {
+                document.getElementById('employee-meeting-text').textContent = reminder.text;
+                document.getElementById('employee-meeting-reminders').classList.remove('hidden');
+            }
+        }
+        
+        // Modal handlers
+        function showRegisterModal() {
+            document.getElementById('register-modal').style.display = 'flex';
+        }
+        
+        function closeRegisterModal() {
+            document.getElementById('register-modal').style.display = 'none';
+        }
+        
+        function showForgotPasswordModal() {
+            document.getElementById('forgot-password-modal').style.display = 'flex';
+        }
+        
+        function closeForgotPasswordModal() {
+            document.getElementById('forgot-password-modal').style.display = 'none';
+        }
+        
+        function handleRegister(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('reg-username').value;
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('reg-confirm-password').value;
+            const email = document.getElementById('reg-email').value;
+            
+            if (!username || !password || !confirmPassword || !email) {
+                showNotification(translations[currentLanguage]['empty-fields'], 'error');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showNotification(translations[currentLanguage]['password-mismatch'], 'error');
+                return;
+            }
+            
+            // In a real app, this would be an API call
+            showNotification(translations[currentLanguage]['account-created'], 'success');
+            closeRegisterModal();
+            
+            // Reset form
+            document.getElementById('register-form').reset();
+        }
+        
+        function handleForgotPassword(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('forgot-username').value;
+            const email = document.getElementById('forgot-email').value;
+            
+            if (!username || !email) {
+                showNotification(translations[currentLanguage]['empty-fields'], 'error');
+                return;
+            }
+            
+            // In a real app, this would be an API call
+            showNotification(translations[currentLanguage]['password-reset'], 'success');
+            closeForgotPasswordModal();
+            
+            // Reset form
+            document.getElementById('forgot-password-form').reset();
+        }
+        
+        // Navigation handlers
+        function handleHomeLink(e) {
+            e.preventDefault();
+            if (currentUserType === 'trainee') {
+                showTraineeDashboard();
+            } else {
+                showEmployeeDashboard();
+            }
+        }
+        
+        function handleDashboardLink(e) {
+            e.preventDefault();
+            showDepartmentSelection();
+        }
+        
+        function handleLogout(e) {
+            e.preventDefault();
+            localStorage.removeItem('currentUser');
+            currentUser = null;
+            currentUserType = null;
+            currentDepartment = null;
+            hideSidebar();
+            showLoginSection();
+            showNotification(translations[currentLanguage]['logout-success'], 'success');
+        }
+        
+        function showLoginSection() {
+            hideAllSections();
+            loginSection.classList.remove('hidden');
+        }
+        
+        function hideAllSections() {
+            loginSection.classList.add('hidden');
+            departmentSelection.classList.add('hidden');
+            traineeDashboard.classList.add('hidden');
+            employeeDashboard.classList.add('hidden');
+            settingsSection.classList.add('hidden');
+            profileSection.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
